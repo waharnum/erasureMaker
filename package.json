@@ -1,0 +1,14 @@
+{
+  "name": "erasuremaker",
+  "version": "0.1.1",
+  "description": "Erasure Maker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alan Harnum",
+  "dependencies": {
+    "jquery": "3.2.1",
+    "kettle": "1.7.1"
+  }
+}
