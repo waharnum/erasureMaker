@@ -119,6 +119,10 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         "onMarkupAppended.addModeControls": {
             func: "ca.alanharnum.erasureMaker.controls.addModeControls",
             args: ["{that}"]
+        },
+        "onMarkupAppended.addFunctionControls": {
+            func: "ca.alanharnum.erasureMaker.controls.addFunctionControls",
+            args: ["{that}"]
         }
     }
 });
@@ -160,6 +164,38 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
     });
 };
 
+ca.alanharnum.erasureMaker.controls.addFunctionControls = function (that) {
+        $(".function-control-remove").click(function () {
+            $(".fade").each(function() {
+              $(this).addClass("removed");
+          });
+        });
+
+        $(".function-control-restore").click(function () {
+            $(".character").each(function() {
+              $(this).removeClass("removed");
+          });
+        });
+
+        $(".function-control-erase-all").click(function () {
+            $(".character").each(function() {
+              $(this).addClass("fade");
+          });
+        });
+
+        $(".function-control-restore-all").click(function () {
+            $(".character").each(function() {
+              $(this).removeClass("fade");
+          });
+        });
+
+        $(".function-control-finalize").click(function () {
+        $(".fade").each(function() {
+          $(this).html("<span class='spacer'></span>");
+            });
+        });
+};
+
 var MODE_CLICK = "MODE_CLICK";
 var MODE_ERASE = "MODE_ERASE";
 var MODE_RESTORE = "MODE_RESTORE";
@@ -169,36 +205,6 @@ var currentMode = MODE_CLICK;
 $(document).ready(function () {
 
     ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
-
-    $(".function-control-remove").click(function () {
-    $(".fade").each(function() {
-      $(this).addClass("removed");
-    })
-    });
-
-    $(".function-control-restore").click(function () {
-    $(".character").each(function() {
-      $(this).removeClass("removed");
-    })
-    });
-
-    $(".function-control-erase-all").click(function () {
-    $(".character").each(function() {
-      $(this).addClass("fade");
-    })
-    });
-
-    $(".function-control-restore-all").click(function () {
-    $(".character").each(function() {
-      $(this).removeClass("fade");
-    })
-    });
-
-    $(".function-control-finalize").click(function () {
-    $(".fade").each(function() {
-      $(this).html("<span class='spacer'></span>");
-    })
-    });
 
     $(".paragraph").each(function (i,e) {
     var splitText = $(this).text().split("");
