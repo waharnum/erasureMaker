@@ -110,8 +110,28 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
             </div>
         </form>
         `
+    },
+    listeners: {
+        "onMarkupAppended.addKeyboardShortcuts": {
+            func: "ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts",
+            args: ["{that}"]
+        }
     }
 });
+
+ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
+    $(document).keyup(function (e) {
+        if(e.key === "c") {
+          $(".mode-control-click").click();
+        }
+        if(e.key === "e") {
+          $(".mode-control-erase").click();
+        }
+        if(e.key === "r") {
+          $(".mode-control-restore").click();
+        }
+    });
+};
 
 var MODE_CLICK = "MODE_CLICK";
 var MODE_ERASE = "MODE_ERASE";
@@ -142,18 +162,6 @@ $(document).ready(function () {
       $(this).addClass("current-control");
       $(".mode-control-click").removeClass("current-control");
     $(".mode-control-erase").removeClass("current-control");
-    });
-
-    $(document).keyup(function (e) {
-    if(e.key === "c") {
-      $(".mode-control-click").click();
-    }
-    if(e.key === "e") {
-      $(".mode-control-erase").click();
-    }
-    if(e.key === "r") {
-      $(".mode-control-restore").click();
-    }
     });
 
     $(".function-control-remove").click(function () {
