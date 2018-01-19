@@ -19,7 +19,7 @@ Let all these kings and tycoons and masters of business and all those workers in
 all our senators and governors and majors pay half of their monthly $30 wage to their
 families and pay war risk insurance and buy Liberty Bonds.
 `
-}
+};
 
 var TEXT_STOKES_MOTOR = {
 source: "https://www.gutenberg.org/files/35857/35857-0.txt",
@@ -39,7 +39,7 @@ The wish was no sooner uttered than it was granted by the kind and
 merciful providence who has a special tenderness for helpless,
 middle-aged spinsters.
 `
-}
+};
 
 var TEXT_BURROUGHS_CORE = {
 source: "http://www.gutenberg.org/cache/epub/123/pg123.txt",
@@ -68,7 +68,7 @@ the wooden benches had been pretty well filled by slaves and Sagoths, I
 discovered the purpose of the bowlders, for then the Mahars began to
 file into the enclosure.
 `
-}
+};
 
 
 var TEXT_KROPOTKIN_CONQUEST = {
@@ -81,6 +81,6 @@ A vast array of courts, judges, executioners, policemen, and gaolers is needed t
 
 The system under which we live checks in its turn the growth of the social sentiment. We all know that without uprightness, without self-respect, without sympathy and mutual aid, human kind must perish, as perish the few races of animals living by rapine, or the slave-keeping ants. But such ideas are not to the taste of the ruling classes, and they have elaborated a whole system of pseudo-science to teach the contrary.
 `
-}
+};
 
-var texts = [TEXT_BUTLER_WAR, TEXT_STOKES_MOTOR, TEXT_BURROUGHS_CORE, TEXT_KROPOTKIN_CONQUEST]
+var texts = [TEXT_BUTLER_WAR, TEXT_STOKES_MOTOR, TEXT_BURROUGHS_CORE, TEXT_KROPOTKIN_CONQUEST];

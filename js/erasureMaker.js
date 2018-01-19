@@ -113,12 +113,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
     }
 });
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
-
-var selectedText = texts[getRandomInt(texts.length)];
-
 var MODE_CLICK = "MODE_CLICK";
 var MODE_ERASE = "MODE_ERASE";
 var MODE_RESTORE = "MODE_RESTORE";
