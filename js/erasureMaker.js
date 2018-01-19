@@ -1,4 +1,4 @@
-fluid.defaults("ca.alanharnum.markupAppendingComponent", {
+fluid.defaults("ca.alanharnum.erasureMaker.markupAppendingComponent", {
         listeners: {
             "onCreate.appendMarkup": {
                 "this": "{that}.container",
@@ -17,17 +17,23 @@ fluid.defaults("ca.alanharnum.markupAppendingComponent", {
 );
 
 fluid.defaults("ca.alanharnum.erasureMaker", {
-    gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
+    gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     components: {
         erasureText: {
             type: "ca.alanharnum.erasureMaker.text",
             container: ".erasureMaker-text",
-            createOnEvent: "onMarkupAppended"
+            createOnEvent: "onMarkupAppended",
+            options: {
+                availableTexts: "{availableErasureTexts}.options.texts"
+            }
         },
         erasureControls: {
             type: "ca.alanharnum.erasureMaker.controls",
             container: ".erasureMaker-controls",
             createOnEvent: "onMarkupAppended"
+        },
+        availableErasureTexts: {
+            type: "ca.alanharnum.erasureMaker.availableErasureTexts"
         }
     },
     strings: {
@@ -40,10 +46,24 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
 });
 
 fluid.defaults("ca.alanharnum.erasureMaker.text", {
-    gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
+    gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     selectors: {
         "text": ".text",
         "source": ".source"
+    },
+    availableTexts: {
+        quickBrownFox: {
+            source: "http://alanharnum.ca",
+            text:
+                `
+                The quick brown fox
+
+                jumped over
+
+                the lazy dog
+
+                `
+        }
     },
     strings: {
         markup:
@@ -75,7 +95,9 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-    var selectedText = texts[getRandomInt(texts.length)];
+    var availableTexts = fluid.hashToArray(that.options.availableTexts, "key");
+
+    var selectedText = availableTexts[getRandomInt(availableTexts.length)];
 
     var source = selectedText.source;
 
@@ -128,7 +150,7 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
 };
 
 fluid.defaults("ca.alanharnum.erasureMaker.controls", {
-    gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
+    gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     strings: {
         markup:
         `
