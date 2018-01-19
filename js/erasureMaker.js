@@ -41,14 +41,48 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
 
 fluid.defaults("ca.alanharnum.erasureMaker.text", {
     gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
+    selectors: {
+        "text": ".text",
+        "source": ".source"
+    },
     strings: {
         markup:
         `
         <div class="text"></div>
         <div class="source"></div>
         `
+    },
+    listeners: {
+        "onMarkupAppended.addSourceText": {
+            func: "ca.alanharnum.erasureMaker.text.addSourceText",
+            args: ["{that}"]
+        }
     }
 });
+
+ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    var selectedText = texts[getRandomInt(texts.length)];
+
+    var source = selectedText.source;
+
+    var sourceMarkup = "<a href='" + source + "'>Source</a>";
+
+    that.locate("source").append(sourceMarkup);
+
+    var text = selectedText.text;
+
+    var splitText = text.split("\n\n");
+
+    splitText.forEach(function (para) {
+        var paraMarkup = "<p class='paragraph'>" + para + "</p>";
+        that.locate("text").append(paraMarkup);
+    });
+
+};
 
 fluid.defaults("ca.alanharnum.erasureMaker.controls", {
     gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
@@ -80,7 +114,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
 });
 
 function getRandomInt(max) {
-return Math.floor(Math.random() * Math.floor(max));
+    return Math.floor(Math.random() * Math.floor(max));
 }
 
 var selectedText = texts[getRandomInt(texts.length)];
@@ -93,23 +127,7 @@ var currentMode = MODE_CLICK;
 
 $(document).ready(function () {
 
-
     ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
-
-    var source = selectedText.source;
-
-    var sourceMarkup = "<a href='" + source + "'>Source</a>";
-
-    $(".source").append(sourceMarkup);
-
-    var text = selectedText.text;
-
-    var splitText = text.split("\n\n");
-
-    splitText.forEach(function (para) {
-    var paraMarkup = "<p class='paragraph'>" + para + "</p>"
-    $(".text").append(paraMarkup);
-    });
 
     $(".mode-control-click").click(function () {
     currentMode = MODE_CLICK;
