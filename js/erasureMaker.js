@@ -115,6 +115,10 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         "onMarkupAppended.addKeyboardShortcuts": {
             func: "ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts",
             args: ["{that}"]
+        },
+        "onMarkupAppended.addModeControls": {
+            func: "ca.alanharnum.erasureMaker.controls.addModeControls",
+            args: ["{that}"]
         }
     }
 });
@@ -133,20 +137,11 @@ ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
     });
 };
 
-var MODE_CLICK = "MODE_CLICK";
-var MODE_ERASE = "MODE_ERASE";
-var MODE_RESTORE = "MODE_RESTORE";
-
-var currentMode = MODE_CLICK;
-
-$(document).ready(function () {
-
-    ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
-
+ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
     $(".mode-control-click").click(function () {
     currentMode = MODE_CLICK;
     $(this).addClass("current-control");
-      $(".mode-control-erase").removeClass("current-control")
+      $(".mode-control-erase").removeClass("current-control");
         $(".mode-control-restore").removeClass("current-control");
     });
 
@@ -163,6 +158,17 @@ $(document).ready(function () {
       $(".mode-control-click").removeClass("current-control");
     $(".mode-control-erase").removeClass("current-control");
     });
+};
+
+var MODE_CLICK = "MODE_CLICK";
+var MODE_ERASE = "MODE_ERASE";
+var MODE_RESTORE = "MODE_RESTORE";
+
+var currentMode = MODE_CLICK;
+
+$(document).ready(function () {
+
+    ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
 
     $(".function-control-remove").click(function () {
     $(".fade").each(function() {
