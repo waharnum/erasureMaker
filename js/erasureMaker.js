@@ -56,6 +56,16 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
         "onMarkupAppended.addSourceText": {
             func: "ca.alanharnum.erasureMaker.text.addSourceText",
             args: ["{that}"]
+        },
+        "onMarkupAppended.addErasureByCharacterStructure": {
+            func: "ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure",
+            args: ["{that}"],
+            priority: "after:addSourceText"
+        },
+        "onMarkupAppended.addCharacterErasureEvents": {
+            func: "ca.alanharnum.erasureMaker.text.addCharacterErasureEvents",
+            args: ["{that}"],
+            priority: "after:addErasureByCharacterStructure"
         }
     }
 });
@@ -82,6 +92,39 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
         that.locate("text").append(paraMarkup);
     });
 
+};
+
+ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure = function (that) {
+        $(".paragraph").each(function (i,e) {
+            var splitText = $(this).text().split("");
+
+            var spannedText = [];
+
+            splitText.forEach(function (currentValue) {
+              var spanned = "<span class='character'>" + currentValue + "</span>";
+              spannedText.push(spanned);
+            });
+
+            $(this).html(spannedText.join(""));
+        });
+};
+
+ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
+    $(".character").each(function (i,e) {
+        $(this).click(function () {
+          if(currentMode === MODE_CLICK) {
+            $(this).toggleClass("fade");
+          }
+        });
+        $(this).mouseenter(function () {
+          if(currentMode === MODE_ERASE) {
+            $(this).addClass("fade");
+          }
+          if(currentMode === MODE_RESTORE) {
+            $(this).removeClass("fade");
+          }
+        });
+    });
 };
 
 fluid.defaults("ca.alanharnum.erasureMaker.controls", {
@@ -124,43 +167,48 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
             func: "ca.alanharnum.erasureMaker.controls.addFunctionControls",
             args: ["{that}"]
         }
+    },
+    selectors: {
+        "mode-control-click": ".mode-control-click",
+        "mode-control-erase": ".mode-control-erase",
+        "mode-control-restore": ".mode-control-restore"
     }
 });
 
 ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
     $(document).keyup(function (e) {
         if(e.key === "c") {
-          $(".mode-control-click").click();
+            that.locate("mode-control-click").click();
         }
         if(e.key === "e") {
-          $(".mode-control-erase").click();
+            that.locate("mode-control-erase").click();
         }
         if(e.key === "r") {
-          $(".mode-control-restore").click();
+            that.locate("mode-control-restore").click();
         }
     });
 };
 
 ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
-    $(".mode-control-click").click(function () {
-    currentMode = MODE_CLICK;
-    $(this).addClass("current-control");
-      $(".mode-control-erase").removeClass("current-control");
-        $(".mode-control-restore").removeClass("current-control");
+    that.locate("mode-control-click").click(function () {
+        currentMode = MODE_CLICK;
+        $(this).addClass("current-control");
+          that.locate("mode-control-erase").removeClass("current-control");
+          that.locate("mode-control-restore").removeClass("current-control");
     });
 
-    $(".mode-control-erase").click(function () {
-      currentMode = MODE_ERASE;
-      $(this).addClass("current-control");
-      $(".mode-control-click").removeClass("current-control");
-    $(".mode-control-restore").removeClass("current-control");
+    that.locate("mode-control-erase").click(function () {
+        currentMode = MODE_ERASE;
+        $(this).addClass("current-control");
+        that.locate("mode-control-click").removeClass("current-control");
+        that.locate("mode-control-restore").removeClass("current-control");
     });
 
-    $(".mode-control-restore").click(function () {
-      currentMode = MODE_RESTORE;
-      $(this).addClass("current-control");
-      $(".mode-control-click").removeClass("current-control");
-    $(".mode-control-erase").removeClass("current-control");
+    that.locate("mode-control-restore").click(function () {
+        currentMode = MODE_RESTORE;
+        $(this).addClass("current-control");
+        that.locate("mode-control-click").removeClass("current-control");
+        that.locate("mode-control-erase").removeClass("current-control");
     });
 };
 
@@ -203,35 +251,5 @@ var MODE_RESTORE = "MODE_RESTORE";
 var currentMode = MODE_CLICK;
 
 $(document).ready(function () {
-
     ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
-
-    $(".paragraph").each(function (i,e) {
-    var splitText = $(this).text().split("");
-
-    var spannedText = [];
-
-    splitText.forEach(function (currentValue) {
-      var spanned = "<span class='character'>" + currentValue + "</span>";
-      spannedText.push(spanned);
-    });
-
-    $(this).html(spannedText.join(""));
-    });
-
-    $(".character").each(function (i,e) {
-    $(this).click(function () {
-      if(currentMode === MODE_CLICK) {
-        $(this).toggleClass("fade");
-      }
-    });
-    $(this).mouseenter(function () {
-      if(currentMode === MODE_ERASE) {
-        $(this).addClass("fade");
-      }
-      if(currentMode === MODE_RESTORE) {
-        $(this).removeClass("fade");
-      }
-    });
-    });
 });
