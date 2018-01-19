@@ -80,6 +80,55 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
 
             The system under which we live checks in its turn the growth of the social sentiment. We all know that without uprightness, without self-respect, without sympathy and mutual aid, human kind must perish, as perish the few races of animals living by rapine, or the slave-keeping ants. But such ideas are not to the taste of the ruling classes, and they have elaborated a whole system of pseudo-science to teach the contrary.
             `
+        },
+        gilman_yellow: {
+            source: "https://www.gutenberg.org/files/1952/1952-0.txt",
+            text:
+            `
+            I lie here on this great immovable bed—it is nailed down, I believe—and
+            follow that pattern about by the hour. It is as good as gymnastics, I
+            assure you. I start, we’ll say, at the bottom, down in the corner over
+            there where it has not been touched, and I determine for the thousandth
+            time that I will follow that pointless pattern to some sort of a
+            conclusion.
+
+            I know a little of the principle of design, and I know this thing was not
+            arranged on any laws of radiation, or alternation, or repetition, or
+            symmetry, or anything else that I ever heard of.
+
+            It is repeated, of course, by the breadths, but not otherwise.
+            `
+        },
+        london_call: {
+            source: "https://www.gutenberg.org/files/215/215-0.txt",
+            text:
+            `
+            And Buck was truly a red-eyed devil, as he drew himself together for the
+            spring, hair bristling, mouth foaming, a mad glitter in his blood-shot
+            eyes. Straight at the man he launched his one hundred and forty pounds
+            of fury, surcharged with the pent passion of two days and nights. In
+            mid air, just as his jaws were about to close on the man, he received
+            a shock that checked his body and brought his teeth together with an
+            agonizing clip. He whirled over, fetching the ground on his back and
+            side. He had never been struck by a club in his life, and did not
+            understand. With a snarl that was part bark and more scream he was again
+            on his feet and launched into the air. And again the shock came and he
+            was brought crushingly to the ground. This time he was aware that it was
+            the club, but his madness knew no caution. A dozen times he charged, and
+            as often the club broke the charge and smashed him down.
+
+            After a particularly fierce blow, he crawled to his feet, too dazed to
+            rush. He staggered limply about, the blood flowing from nose and mouth
+            and ears, his beautiful coat sprayed and flecked with bloody slaver.
+            Then the man advanced and deliberately dealt him a frightful blow on
+            the nose. All the pain he had endured was as nothing compared with the
+            exquisite agony of this. With a roar that was almost lionlike in its
+            ferocity, he again hurled himself at the man. But the man, shifting the
+            club from right to left, coolly caught him by the under jaw, at the same
+            time wrenching downward and backward. Buck described a complete circle
+            in the air, and half of another, then crashed to the ground on his head
+            and chest.
+            `
         }
     }
 });

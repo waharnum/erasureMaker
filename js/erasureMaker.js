@@ -18,19 +18,31 @@ fluid.defaults("ca.alanharnum.erasureMaker.markupAppendingComponent", {
 
 fluid.defaults("ca.alanharnum.erasureMaker", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
+    model: {
+        currentMode: "click"
+    },
     components: {
         erasureText: {
             type: "ca.alanharnum.erasureMaker.text",
             container: ".erasureMaker-text",
             createOnEvent: "onMarkupAppended",
             options: {
-                availableTexts: "{availableErasureTexts}.options.texts"
+                availableTexts: "{availableErasureTexts}.options.texts",
+                model: {
+                    currentMode: "{erasureMaker}.model.currentMode"
+                }
             }
         },
         erasureControls: {
             type: "ca.alanharnum.erasureMaker.controls",
             container: ".erasureMaker-controls",
-            createOnEvent: "onMarkupAppended"
+            createOnEvent: "onMarkupAppended",
+            options: {
+                model: {
+                    currentMode: "{erasureMaker}.model.currentMode"
+                }
+
+            }
         },
         availableErasureTexts: {
             type: "ca.alanharnum.erasureMaker.availableErasureTexts"
@@ -47,9 +59,14 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
 
 fluid.defaults("ca.alanharnum.erasureMaker.text", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
+    model: {
+        currentMode: "click"
+    },
     selectors: {
         "text": ".text",
-        "source": ".source"
+        "source": ".source",
+        "paragraph": ".paragraph",
+        "character": ".character"
     },
     availableTexts: {
         quickBrownFox: {
@@ -117,7 +134,7 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
 };
 
 ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure = function (that) {
-        $(".paragraph").each(function (i,e) {
+        that.locate("paragraph").each(function (i,e) {
             var splitText = $(this).text().split("");
 
             var spannedText = [];
@@ -132,17 +149,17 @@ ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure = function (that)
 };
 
 ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
-    $(".character").each(function (i,e) {
+    that.locate("character").each(function (i,e) {
         $(this).click(function () {
-          if(currentMode === MODE_CLICK) {
+          if(that.model.currentMode === "click") {
             $(this).toggleClass("fade");
           }
         });
         $(this).mouseenter(function () {
-          if(currentMode === MODE_ERASE) {
+          if(that.model.currentMode === "erase") {
             $(this).addClass("fade");
           }
-          if(currentMode === MODE_RESTORE) {
+          if(that.model.currentMode === "restore") {
             $(this).removeClass("fade");
           }
         });
@@ -151,6 +168,9 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
 
 fluid.defaults("ca.alanharnum.erasureMaker.controls", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
+    model: {
+        currentMode: "click"
+    },
     strings: {
         markup:
         `
@@ -213,21 +233,21 @@ ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
 
 ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
     that.locate("mode-control-click").click(function () {
-        currentMode = MODE_CLICK;
+        that.applier.change("currentMode", "click");
         $(this).addClass("current-control");
           that.locate("mode-control-erase").removeClass("current-control");
           that.locate("mode-control-restore").removeClass("current-control");
     });
 
     that.locate("mode-control-erase").click(function () {
-        currentMode = MODE_ERASE;
+        that.applier.change("currentMode", "erase");
         $(this).addClass("current-control");
         that.locate("mode-control-click").removeClass("current-control");
         that.locate("mode-control-restore").removeClass("current-control");
     });
 
     that.locate("mode-control-restore").click(function () {
-        currentMode = MODE_RESTORE;
+        that.applier.change("currentMode", "restore");
         $(this).addClass("current-control");
         that.locate("mode-control-click").removeClass("current-control");
         that.locate("mode-control-erase").removeClass("current-control");
@@ -265,12 +285,6 @@ ca.alanharnum.erasureMaker.controls.addFunctionControls = function (that) {
             });
         });
 };
-
-var MODE_CLICK = "MODE_CLICK";
-var MODE_ERASE = "MODE_ERASE";
-var MODE_RESTORE = "MODE_RESTORE";
-
-var currentMode = MODE_CLICK;
 
 $(document).ready(function () {
     ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
