@@ -1,3 +1,84 @@
+fluid.defaults("ca.alanharnum.markupAppendingComponent", {
+        listeners: {
+            "onCreate.appendMarkup": {
+                "this": "{that}.container",
+                "method": "append",
+                "args": "{that}.options.strings.markup"
+            },
+            "onCreate.fireOnMarkupAppended": {
+                "func": "{that}.events.onMarkupAppended.fire",
+                "priority": "after:appendMarkup"
+            }
+        },
+        events: {
+            "onMarkupAppended": null
+        }
+    }
+);
+
+fluid.defaults("ca.alanharnum.erasureMaker", {
+    gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
+    components: {
+        erasureText: {
+            type: "ca.alanharnum.erasureMaker.text",
+            container: ".erasureMaker-text",
+            createOnEvent: "onMarkupAppended"
+        },
+        erasureControls: {
+            type: "ca.alanharnum.erasureMaker.controls",
+            container: ".erasureMaker-controls",
+            createOnEvent: "onMarkupAppended"
+        }
+    },
+    strings: {
+        markup:
+        `
+        <div class="erasureMaker-controls"></div>
+        <div class="erasureMaker-text"></div>
+        `
+    }
+});
+
+fluid.defaults("ca.alanharnum.erasureMaker.text", {
+    gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
+    strings: {
+        markup:
+        `
+        <div class="text"></div>
+        <div class="source"></div>
+        `
+    }
+});
+
+fluid.defaults("ca.alanharnum.erasureMaker.controls", {
+    gradeNames: ["ca.alanharnum.markupAppendingComponent", "fluid.viewComponent"],
+    strings: {
+        markup:
+        `
+        <form>
+            <div class="mode-controls controls">
+                <label class="mode-control-click current-control"><span class="keyboard-shortcut-indicator">[c]</span>lickmode
+                    <input checked type="radio" name="mode-control-radio" value="click" />
+                </label>
+                <label class="mode-control-erase"><span class="keyboard-shortcut-indicator">[e]</span>rasemode
+                    <input type="radio" name="mode-control-radio" value="erase" />
+                </label>
+                <label class="mode-control-restore"><span class="keyboard-shortcut-indicator">[r]</span>estoremode
+                    <input type="radio" name="mode-control-radio" value="restore" />
+                </label>
+            </div>
+            <div class="function-controls controls">
+                <span class="function-control-erase-all">eraseall</span>
+                <span class="function-control-restore-all">restoreall</span>
+                <span class="function-control-remove">removeerased</span>
+                <span class="function-control-restore">restoreerased</span>
+                <span class="function-control-finalize">finalize</span>
+            </div>
+        </form>
+        `
+    }
+});
+
 function getRandomInt(max) {
 return Math.floor(Math.random() * Math.floor(max));
 }
@@ -12,6 +93,8 @@ var currentMode = MODE_CLICK;
 
 $(document).ready(function () {
 
+
+    ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
 
     var source = selectedText.source;
 
