@@ -201,6 +201,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                 <span class="function-control-remove">removeerased</span>
                 <span class="function-control-restore">restoreerased</span>
                 <span class="function-control-finalize">finalize</span>
+                <span class="function-control-save">save</span>
             </div>
         </form>
         `
@@ -293,6 +294,15 @@ ca.alanharnum.erasureMaker.controls.addFunctionControls = function (that) {
           $(this).html("<span class='spacer'></span>");
             });
         });
+
+        $(".function-control-save").click(function () {
+            console.log("this should save the erasure");
+            var erasureText = $(".text").html();
+            $.post("http://localhost:8081/saveErasure/NEW", {text: erasureText}, function () {
+                console.log("it worked!");
+            });
+        });
+
 };
 
 $(document).ready(function () {

@@ -13,6 +13,9 @@ fluid.defaults("ca.alanharnum.erasuremaker.server", {
             options: {
                 port: 8081,
                 components: {
+                    erasureDataSource: {
+                        type: "ca.alanharnum.erasuremaker.server.dataSource.file"
+                    },
                     ui: {
                         type: "kettle.middleware.static",
                         options: {
@@ -47,6 +50,11 @@ fluid.defaults("ca.alanharnum.erasuremaker.server.app.handlers", {
             type: "ca.alanharnum.erasuremaker.server.uiHandler",
             "route": "/*",
             "method": "get"
+        },
+        saveErasureHandler: {
+            type: "ca.alanharnum.erasuremaker.server.saveErasureHandler",
+            "route": "/saveErasure/:id",
+            "method": "post"
         }
      }
 });
