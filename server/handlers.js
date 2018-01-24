@@ -50,7 +50,7 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
 
     promise.then(function (response) {
         console.log("success");
-        var responseAsJSON = JSON.stringify(response);
+        var responseAsJSON = JSON.stringify({message: "Success!", savedErasuseId: id});
         request.events.onSuccess.fire(responseAsJSON);
     }, function (error) {
         console.log("error");
