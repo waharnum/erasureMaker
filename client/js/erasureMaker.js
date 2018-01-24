@@ -298,7 +298,8 @@ ca.alanharnum.erasureMaker.controls.addFunctionControls = function (that) {
         $(".function-control-save").click(function () {
             console.log("this should save the erasure");
             var erasureText = $(".text").html();
-            $.post("http://localhost:8081/saveErasure/NEW", {text: erasureText}, function () {
+            var erasureTitle = prompt("Enter your erasure's title", "Untitled");
+            $.post("http://localhost:8081/saveErasure/NEW", {title: erasureTitle, text: erasureText}, function () {
                 console.log("it worked!");
             });
         });
