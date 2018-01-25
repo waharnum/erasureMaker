@@ -202,6 +202,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                 <span class="function-control-restore">restoreerased</span>
                 <span class="function-control-finalize">finalize</span>
                 <span class="function-control-save">save</span>
+                <span class="function-control-get">get</span>
             </div>
         </form>
         `
@@ -299,10 +300,23 @@ ca.alanharnum.erasureMaker.controls.addFunctionControls = function (that) {
             console.log("this should save the erasure");
             var erasureText = $(".text").html();
             var erasureTitle = prompt("Enter your erasure's title", "Untitled");
-            $.post("http://localhost:8081/saveErasure/NEW", {title: erasureTitle, text: erasureText}, function ( data ) {
+            $.post("http://localhost:8081/erasure/NEW", {title: erasureTitle, text: erasureText}, function ( data ) {
                 console.log("it worked!", data);
             });
         });
+
+        $(".function-control-get").click(function () {
+            console.log("this should load an existing erasure");
+            var erasureId = prompt("Enter the erasure ID", "Untitled");
+            var url = "http://localhost:8081/erasure/" + erasureId;
+            console.log(url);
+            $.get("http://localhost:8081/erasure/" + erasureId, function ( data ) {
+                console.log("it worked!", data);
+                var data = JSON.parse(data);
+                $(".text").html(data.text);
+            });
+        });
+
 
 };
 
