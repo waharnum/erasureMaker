@@ -223,7 +223,16 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
     selectors: {
         "mode-control-click": ".mode-control-click",
         "mode-control-erase": ".mode-control-erase",
-        "mode-control-restore": ".mode-control-restore"
+        "mode-control-restore": ".mode-control-restore",
+        "function-control-erase-all": ".function-control-erase-all",
+        "function-control-restore-all": ".function-control-restore-all",
+        "function-control-remove": ".function-control-remove",
+        "function-control-restore": ".function-control-restore",
+        "function-control-finalize": ".function-control-finalize",
+        "function-control-save": ".function-control-save"
+
+
+
     }
 });
 
@@ -265,41 +274,46 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
 };
 
 ca.alanharnum.erasureMaker.controls.addFunctionControls = function (that) {
-        $(".function-control-remove").click(function () {
+        that.locate("function-control-remove").click(function () {
             $(".fade").each(function() {
               $(this).addClass("removed");
           });
         });
 
-        $(".function-control-restore").click(function () {
+        that.locate("function-control-restore").click(function () {
             $(".character").each(function() {
               $(this).removeClass("removed");
           });
         });
 
-        $(".function-control-erase-all").click(function () {
+        that.locate("function-control-erase-all").click(function () {
             $(".character").each(function() {
               $(this).addClass("fade");
           });
         });
 
-        $(".function-control-restore-all").click(function () {
+        that.locate("function-control-restore-all").click(function () {
             $(".character").each(function() {
               $(this).removeClass("fade");
           });
         });
 
-        $(".function-control-finalize").click(function () {
+        that.locate("function-control-finalize").click(function () {
         $(".fade").each(function() {
           $(this).html("<span class='spacer'></span>");
             });
         });
 
-        $(".function-control-save").click(function () {
+        that.locate("function-control-save").click(function () {
             console.log("this should save the erasure");
             var erasureText = $(".text").html();
             var erasureTitle = prompt("Enter your erasure's title", "Untitled");
-            $.post("http://localhost:8081/saveErasure/NEW", {title: erasureTitle, text: erasureText}, function ( data ) {
+            var erasureData = {
+                                title: erasureTitle,
+                                text: erasureText
+                            };
+
+            $.post("http://localhost:8081/saveErasure/NEW", erasureData, function ( data ) {
                 console.log("it worked!", data);
             });
         });
