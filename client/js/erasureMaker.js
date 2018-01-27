@@ -49,6 +49,12 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
             options: {
                 model: {
                     currentMode: "{erasureMaker}.model.currentMode"
+                },
+                listeners: {
+                    "onMarkupAppended.addTextFunctionControls": {
+                        func: "ca.alanharnum.erasureMaker.addTextFunctionControls",
+                        args: ["{that}", "{erasureText}"]
+                    }
                 }
 
             }
@@ -66,6 +72,53 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
     }
 });
 
+ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsComponent, erasureTextComponent) {
+
+        erasureControlsComponent.locate("function-control-erase-all").click(function () {
+            erasureTextComponent.locate("character").each(function() {
+              $(this).addClass("fade");
+          });
+        });
+
+        erasureControlsComponent.locate("function-control-restore-all").click(function () {
+            erasureTextComponent.locate("character").each(function() {
+              $(this).removeClass("fade");
+          });
+        });
+
+        erasureControlsComponent.locate("function-control-remove").click(function () {
+            erasureTextComponent.locate("fade").each(function() {
+              $(this).addClass("removed");
+          });
+        });
+
+        erasureControlsComponent.locate("function-control-restore").click(function () {
+            erasureTextComponent.locate("character").each(function() {
+              $(this).removeClass("removed");
+          });
+        });
+
+        erasureControlsComponent.locate("function-control-finalize").click(function () {
+        erasureTextComponent.locate("fade").each(function() {
+          $(this).html("<span class='spacer'></span>");
+            });
+        });
+
+        erasureControlsComponent.locate("function-control-save").click(function () {
+            console.log("this should save the erasure");
+            var erasureText = erasureTextComponent.locate("text").html();
+            var erasureTitle = prompt("Enter your erasure's title", "Untitled");
+            var erasureData = {
+                                title: erasureTitle,
+                                text: erasureText
+                            };
+
+            $.post("http://localhost:8081/saveErasure/NEW", erasureData, function ( data ) {
+                console.log("it worked!", data);
+            });
+        });
+};
+
 fluid.defaults("ca.alanharnum.erasureMaker.text", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
@@ -75,7 +128,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
         "text": ".text",
         "source": ".source",
         "paragraph": ".paragraph",
-        "character": ".character"
+        "character": ".character",
+        "fade": ".fade"
     },
     availableTexts: {
         quickBrownFox: {
@@ -214,10 +268,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         "onMarkupAppended.addModeControls": {
             func: "ca.alanharnum.erasureMaker.controls.addModeControls",
             args: ["{that}"]
-        },
-        "onMarkupAppended.addFunctionControls": {
-            func: "ca.alanharnum.erasureMaker.controls.addFunctionControls",
-            args: ["{that}"]
         }
     },
     selectors: {
@@ -271,53 +321,6 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
         that.locate("mode-control-click").removeClass("current-control");
         that.locate("mode-control-erase").removeClass("current-control");
     });
-};
-
-ca.alanharnum.erasureMaker.controls.addFunctionControls = function (that) {
-        that.locate("function-control-remove").click(function () {
-            $(".fade").each(function() {
-              $(this).addClass("removed");
-          });
-        });
-
-        that.locate("function-control-restore").click(function () {
-            $(".character").each(function() {
-              $(this).removeClass("removed");
-          });
-        });
-
-        that.locate("function-control-erase-all").click(function () {
-            $(".character").each(function() {
-              $(this).addClass("fade");
-          });
-        });
-
-        that.locate("function-control-restore-all").click(function () {
-            $(".character").each(function() {
-              $(this).removeClass("fade");
-          });
-        });
-
-        that.locate("function-control-finalize").click(function () {
-        $(".fade").each(function() {
-          $(this).html("<span class='spacer'></span>");
-            });
-        });
-
-        that.locate("function-control-save").click(function () {
-            console.log("this should save the erasure");
-            var erasureText = $(".text").html();
-            var erasureTitle = prompt("Enter your erasure's title", "Untitled");
-            var erasureData = {
-                                title: erasureTitle,
-                                text: erasureText
-                            };
-
-            $.post("http://localhost:8081/saveErasure/NEW", erasureData, function ( data ) {
-                console.log("it worked!", data);
-            });
-        });
-
 };
 
 $(document).ready(function () {
