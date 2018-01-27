@@ -196,12 +196,12 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                 </label>
             </div>
             <div class="function-controls controls">
-                <span class="function-control-erase-all">eraseall</span>
-                <span class="function-control-restore-all">restoreall</span>
-                <span class="function-control-remove">removeerased</span>
-                <span class="function-control-restore">restoreerased</span>
-                <span class="function-control-finalize">finalize</span>
-                <span class="function-control-save">save</span>
+                <button type="button" class="function-control-erase-all">eraseall</button>
+                <button type="button" class="function-control-restore-all">restoreall</button>
+                <button type="button" class="function-control-remove">removeerased</button>
+                <button type="button" class="function-control-restore">restoreerased</button>
+                <button type="button" class="function-control-finalize">finalize</button>
+                <button type="button" class="function-control-save">save</button>
             </div>
         </form>
         `
