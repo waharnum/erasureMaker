@@ -113,7 +113,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                                 text: erasureText
                             };
 
-            $.post("http://localhost:8081/saveErasure/NEW", erasureData, function ( data ) {
+            $.post("http://localhost:8081/erasure/NEW", erasureData, function ( data ) {
                 console.log("it worked!", data);
             });
         });

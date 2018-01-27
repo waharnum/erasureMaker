@@ -59,5 +59,34 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
             message: errorAsJSON
         });
     });
-
 };
+
+fluid.defaults("ca.alanharnum.erasuremaker.server.getErasureHandler", {
+    gradeNames: ["kettle.request.http"],
+    invokers: {
+        handleRequest: {
+            funcName: "ca.alanharnum.erasuremaker.server.getErasureHandler.handleRequest",
+            args: ["{request}", "{server}.erasureDataSource"]
+        }
+    }
+});
+
+ca.alanharnum.erasuremaker.server.getErasureHandler.handleRequest = function (request, dataSource) {
+  var id = request.req.params.id;
+
+  var promise = dataSource.get({directErasureId: id});
+
+  promise.then(function (response) {
+      console.log("success");
+      var responseAsJSON = JSON.stringify(response);
+      request.events.onSuccess.fire(responseAsJSON);
+  }, function (error) {
+      console.log("error");
+      var errorAsJSON = JSON.stringify(error);
+      request.events.onError.fire({
+          message: errorAsJSON
+      });
+  });
+
+
+}

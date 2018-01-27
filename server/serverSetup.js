@@ -40,21 +40,26 @@ fluid.defaults("ca.alanharnum.erasuremaker.server", {
 fluid.defaults("ca.alanharnum.erasuremaker.server.app.handlers", {
      gradeNames: ["kettle.app"],
      requestHandlers: {
-         nodeModulesHandler: {
-            type: "ca.alanharnum.erasuremaker.server.nodeModulesHandler",
-            "route": "/*",
-            "method": "get",
-            "prefix": "/node_modules"
-        },
-        uiHandler: {
-            type: "ca.alanharnum.erasuremaker.server.uiHandler",
-            "route": "/*",
-            "method": "get"
-        },
         saveErasureHandler: {
             type: "ca.alanharnum.erasuremaker.server.saveErasureHandler",
-            "route": "/saveErasure/:id",
+            "route": "/erasure/:id",
             "method": "post"
-        }
+        },
+        getErasureHandler: {
+          type: "ca.alanharnum.erasuremaker.server.getErasureHandler",
+          "route": "/erasure/:id",
+          "method": "get"
+        },
+        nodeModulesHandler: {
+           type: "ca.alanharnum.erasuremaker.server.nodeModulesHandler",
+           "route": "/*",
+           "method": "get",
+           "prefix": "/node_modules"
+       },
+       uiHandler: {
+           type: "ca.alanharnum.erasuremaker.server.uiHandler",
+           "route": "/*",
+           "method": "get"
+       }
      }
 });
