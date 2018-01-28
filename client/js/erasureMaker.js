@@ -110,7 +110,10 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
             var erasureTitle = prompt("Enter your erasure's title", "Untitled");
             var erasureData = {
                                 title: erasureTitle,
-                                text: erasureText
+                                text: erasureText,
+                                sourceURL: erasureTextComponent.sourceText.sourceURL,
+                                sourceTextAuthor: erasureTextComponent.sourceText.author,
+                                sourceTextTitle: erasureTextComponent.sourceText.title,
                             };
 
             $.post("http://localhost:8081/erasure/NEW", erasureData, function ( data ) {
@@ -128,6 +131,8 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                  console.log("it worked!", data);
                  var erasure = JSON.parse(data);
                  $(".text").html(erasure.text);
+                 var sourceMarkup = `Original text from <em>${erasure.sourceTextTitle}</em> by ${erasure.sourceTextAuthor} (<a href='${erasure.sourceURL}'>source</a>)`;
+                 $(".source").html(sourceMarkup);
             });
         });
 
@@ -196,6 +201,12 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
     var sourceURL = selectedText.sourceURL;
     var title = selectedText.title;
     var author = selectedText.author;
+
+    that.sourceText = {
+        sourceURL: sourceURL,
+        title: title,
+        author: author
+    };
 
     var sourceMarkup = `Original text from <em>${title}</em> by ${author} (<a href='${sourceURL}'>source</a>)`;
 
