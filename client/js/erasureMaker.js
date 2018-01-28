@@ -131,8 +131,10 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                  console.log("it worked!", data);
                  var erasure = JSON.parse(data);
                  erasureTextComponent.locate("text").html(erasure.text);
+                 var erasureTitle = erasure.title;
                  var sourceMarkup = `Original text from <em>${erasure.sourceTextTitle}</em> by ${erasure.sourceTextAuthor} (<a href='${erasure.sourceURL}'>source</a>)`;
                  erasureTextComponent.locate("source").html(sourceMarkup);
+                 erasureTextComponent.locate("erasureTitle").html(`<h2>${erasureTitle}</h2>`);
             });
         });
 
@@ -148,7 +150,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
         "source": ".source",
         "paragraph": ".paragraph",
         "character": ".character",
-        "fade": ".fade"
+        "fade": ".fade",
+        "erasureTitle": ".erasureTitle"
     },
     availableTexts: {
         quickBrownFox: {
@@ -167,6 +170,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
     strings: {
         markup:
         `
+        <div class="erasureTitle"></div>
         <div class="text"></div>
         <div class="source"></div>
         `
