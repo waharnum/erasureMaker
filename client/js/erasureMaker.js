@@ -193,9 +193,11 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
 
     var selectedText = availableTexts[getRandomInt(availableTexts.length)];
 
-    var source = selectedText.source;
+    var sourceURL = selectedText.sourceURL;
+    var title = selectedText.title;
+    var author = selectedText.author;
 
-    var sourceMarkup = "<a href='" + source + "'>Source</a>";
+    var sourceMarkup = `Original text from <em>${title}</em> by ${author} (<a href='${sourceURL}'>source</a>)`;
 
     that.locate("source").append(sourceMarkup);
 

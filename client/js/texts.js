@@ -2,7 +2,9 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
     gradeNames: "fluid.component",
     texts: {
         butler_war: {
-            source: "https://archive.org/stream/WarIsARacket/WarIsARacket_djvu.txt",
+            author: "Smedley Butler",
+            title: "War Is A Racket",
+            sourceURL: "https://archive.org/stream/WarIsARacket/WarIsARacket_djvu.txt",
             text:
             `
             The only way to smash this racket is to conscript capital and industry and labor before the
@@ -24,7 +26,9 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
             `
         },
         stokes_motor: {
-            source: "https://www.gutenberg.org/files/35857/35857-0.txt",
+            sourceURL: "https://www.gutenberg.org/files/35857/35857-0.txt",
+            author: "Katherine Stokes",
+            title: "The Motor Maids by Rose, Shamrock and Thistle",
             text:
             `
             It was quite dark when the train pulled into Paddington Station in
@@ -43,7 +47,9 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
             `
         },
         burroughs_core: {
-            source: "http://www.gutenberg.org/cache/epub/123/pg123.txt",
+            sourceURL: "http://www.gutenberg.org/cache/epub/123/pg123.txt",
+            author: "Edgar Rice Burroughs",
+            title: "At the Earth's Core",
             text:
             `
             Along the crowded avenue we marched, the guards showing unusual cruelty
@@ -71,7 +77,9 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
             `
         },
         kropotkin_conquest: {
-            source: "http://www.gutenberg.org/cache/epub/23428/pg23428.txt",
+            sourceURL: "http://www.gutenberg.org/cache/epub/23428/pg23428.txt",
+            author: "Peter Kropotkin",
+            title: "The Conquest of Bread",
             text:
             `
             Education still remains the privilege of a small minority, for it is idle to talk of education when the workman's child is forced, at the age of thirteen, to go down into the mine or to help his father on the farm. It is idle to talk of studying to the worker, who comes home in the evening wearied by excessive toil, and its brutalizing atmosphere. Society is thus bound to remain divided into two hostile camps, and in such conditions freedom is a vain word. The Radical begins by demanding a greater extension of political rights, but he soon sees that the breath of liberty leads to the uplifting of the proletariat, and then he turns round, changes his opinions, and reverts to repressive legislation and government by the sword.
@@ -82,7 +90,9 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
             `
         },
         gilman_yellow: {
-            source: "https://www.gutenberg.org/files/1952/1952-0.txt",
+            sourceURL: "https://www.gutenberg.org/files/1952/1952-0.txt",
+            author: "Charlotte Perkins Gilman",
+            title: "The Yellow Wallpaper",
             text:
             `
             I lie here on this great immovable bed—it is nailed down, I believe—and
@@ -100,7 +110,9 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
             `
         },
         london_call: {
-            source: "https://www.gutenberg.org/files/215/215-0.txt",
+            sourceURL: "https://www.gutenberg.org/files/215/215-0.txt",
+            author: "Jack London",
+            title: "The Call of the Wild",
             text:
             `
             And Buck was truly a red-eyed devil, as he drew himself together for the
