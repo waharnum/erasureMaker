@@ -117,6 +117,20 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                 console.log("it worked!", data);
             });
         });
+
+
+        erasureControlsComponent.locate("function-control-get").click(function () {
+            console.log("this should load an existing erasure");
+             var erasureId = prompt("Enter the erasure ID", "Untitled");
+             var url = "http://localhost:8081/erasure/" + erasureId;
+             console.log(url);
+             $.get("http://localhost:8081/erasure/" + erasureId, function ( data ) {
+                 console.log("it worked!", data);
+                 var erasure = JSON.parse(data);
+                 $(".text").html(erasure.text);
+            });
+        });
+
 };
 
 fluid.defaults("ca.alanharnum.erasureMaker.text", {
@@ -256,6 +270,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                 <button type="button" class="function-control-restore">restoreerased</button>
                 <button type="button" class="function-control-finalize">finalize</button>
                 <button type="button" class="function-control-save">save</button>
+                <button type="button" class="function-control-get">get</button>
             </div>
         </form>
         `
@@ -279,10 +294,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         "function-control-remove": ".function-control-remove",
         "function-control-restore": ".function-control-restore",
         "function-control-finalize": ".function-control-finalize",
-        "function-control-save": ".function-control-save"
-
-
-
+        "function-control-save": ".function-control-save",
+        "function-control-get": ".function-control-get"
     }
 });
 
