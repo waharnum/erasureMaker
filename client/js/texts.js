@@ -141,6 +141,77 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
             in the air, and half of another, then crashed to the ground on his head
             and chest.
             `
+        },
+        james_varieties: {
+            sourceURL: "http://www.gutenberg.org/cache/epub/621/pg621.txt",
+            author: "William James",
+            title: "The Varieties of Religious Experience",
+            text:
+            `
+            Among us English-speaking peoples especially do the praises of poverty
+            need once more to be boldly sung. We have grown literally afraid to be
+            poor. We despise any one who elects to be poor in order to simplify and
+            save his inner life. If he does not join the general scramble and pant
+            with the money-making street, we deem him spiritless and lacking in
+            ambition. We have lost the power even of imagining what the ancient
+            idealization of poverty could have meant: the liberation from material
+            attachments, the unbribed soul, the manlier indifference, the paying our
+            way by what we are or do and not by what we have, the right to fling away
+            our life at any moment irresponsibly,--the more athletic trim, in short,
+            the moral fighting shape. When we of the so-called better classes are
+            scared as men were never scared in history at material ugliness and
+            hardship; when we put off marriage until our house can be artistic, and
+            quake at the thought of having a child without a bank-account and doomed
+            to manual labor, it is time for thinking men to protest against so unmanly
+            and irreligious a state of opinion.
+
+            It is true that so far as wealth gives time for ideal ends and exercise to
+            ideal energies, wealth is better than poverty and ought to be chosen. But
+            wealth does this in only a portion of the actual cases. Elsewhere the
+            desire to gain wealth and the fear to lose it are our chief breeders of
+            cowardice and propagators of corruption. There are thousands of
+            conjunctures in which a wealth-bound man must be a slave, whilst a man for
+            whom poverty has no terrors becomes a freeman. Think of the strength which
+            personal indifference to poverty would give us if we were devoted to
+            unpopular causes. We need no longer hold our tongues or fear to vote the
+            revolutionary or reformatory ticket. Our stocks might fall, our hopes of
+            promotion vanish, our salaries stop, our club doors close in our faces;
+            yet, while we lived, we would imperturbably bear witness to the spirit,
+            and our example would help to set free our generation. The cause would
+            need its funds, but we its servants would be potent in proportion as we
+            personally were contented with our poverty.
+            `
+        },
+        wharton_mirth: {
+            sourceURL: "http://www.gutenberg.org/cache/epub/284/pg284.txt",
+            author: "Edith Wharton",
+            title: "The House of Mirth",
+            text:
+            `
+            How exhaustive and unpleasant such a process would be, he saw even more
+            vividly after his two hours' talk with poor Dorset. If anything came out
+            at all, it would be such a vast unpacking of accumulated moral rags as
+            left him, after his visitor had gone, with the feeling that he must fling
+            open the windows and have his room swept out. But nothing should come
+            out; and happily for his side of the case, the dirty rags, however pieced
+            together, could not, without considerable difficulty, be turned into a
+            homogeneous grievance. The torn edges did not always fit--there were
+            missing bits, there were disparities of size and colour, all of which it
+            was naturally Selden's business to make the most of in putting them under
+            his client's eye. But to a man in Dorset's mood the completest
+            demonstration could not carry conviction, and Selden saw that for the
+            moment all he could do was to soothe and temporize, to offer sympathy and
+            to counsel prudence. He let Dorset depart charged to the brim with the
+            sense that, till their next meeting, he must maintain a strictly
+            noncommittal attitude; that, in short, his share in the game consisted
+            for the present in looking on. Selden knew, however, that he could not
+            long keep such violences in equilibrium; and he promised to meet Dorset,
+            the next morning, at an hotel in Monte Carlo. Meanwhile he counted not a
+            little on the reaction of weakness and self-distrust that, in such
+            natures, follows on every unwonted expenditure of moral force; and his
+            telegraphic reply to Miss Bart consisted simply in the injunction:
+            "Assume that everything is as usual."
+            `
         }
     }
 });
