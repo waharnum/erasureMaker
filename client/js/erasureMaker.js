@@ -130,9 +130,9 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
              $.get("http://localhost:8081/erasure/" + erasureId, function ( data ) {
                  console.log("it worked!", data);
                  var erasure = JSON.parse(data);
-                 $(".text").html(erasure.text);
+                 erasureTextComponent.locate("text").html(erasure.text);
                  var sourceMarkup = `Original text from <em>${erasure.sourceTextTitle}</em> by ${erasure.sourceTextAuthor} (<a href='${erasure.sourceURL}'>source</a>)`;
-                 $(".source").html(sourceMarkup);
+                 erasureTextComponent.locate("source").html(sourceMarkup);
             });
         });
 
