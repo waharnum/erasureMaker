@@ -111,6 +111,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
             var erasureData = {
                                 title: erasureTitle,
                                 text: erasureText,
+                                sourceKey: erasureTextComponent.sourceText.key,
                                 sourceURL: erasureTextComponent.sourceText.sourceURL,
                                 sourceTextAuthor: erasureTextComponent.sourceText.author,
                                 sourceTextTitle: erasureTextComponent.sourceText.title,
@@ -205,11 +206,13 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
     var sourceURL = selectedText.sourceURL;
     var title = selectedText.title;
     var author = selectedText.author;
+    var key = selectedText.key;
 
     that.sourceText = {
         sourceURL: sourceURL,
         title: title,
-        author: author
+        author: author,
+        key: key
     };
 
     var sourceMarkup = `Original text from <em>${title}</em> by ${author} (<a href='${sourceURL}'>source</a>)`;
