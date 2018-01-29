@@ -8,9 +8,10 @@
   },
   "author": "Alan Harnum",
   "dependencies": {
+    "infusion": "3.0.0-dev.20171117T095227Z.67ff934",
+    "is-uuid": "1.0.2",
     "jquery": "3.2.1",
     "kettle": "1.7.1",
-    "infusion": "3.0.0-dev.20171117T095227Z.67ff934",
     "uuid": "3.1.0"
   }
 }

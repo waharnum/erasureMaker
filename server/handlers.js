@@ -3,6 +3,7 @@
 var fluid = require("infusion");
 require("kettle");
 var uuidv1 = require("uuid/v1");
+var isuuid = require("is-uuid");
 
 var ca = fluid.registerNamespace("ca");
 
@@ -46,14 +47,23 @@ fluid.defaults("ca.alanharnum.erasuremaker.server.saveErasureHandler", {
 ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (request, dataSource) {
     var id = request.req.params.id === "NEW" ? uuidv1() : request.req.params.id;
 
+    // // check for valid UUID if passed from browser https://github.com/afram/is-uuid
+    if(! isuuid.v1(id)) {
+        console.log("Tried to save an erasure with the invalid ID" + id);
+        request.events.onError.fire({
+            message: "Could not save erasure",
+            statusCode: 500
+        });
+    };
+
     var promise = dataSource.set({directErasureId: id}, request.req.body);
 
-    // TODO: sanitize inputs:
-    //    - check for valid UUID if passed from browser https://github.com/afram/is-uuid
+    // TODO: sanitize more inputs
     // TODO: date stamp the erasure here
+    // TODO: investigate 413 errors
 
     promise.then(function (response) {
-        var responseAsJSON = JSON.stringify({message: "Save successful", savedErasuseId: id});
+        var responseAsJSON = JSON.stringify({message: "Save successful", savedErasureId: id});
         request.events.onSuccess.fire(responseAsJSON);
     }, function (error) {
         console.log("error trying to save erasure with id " + id, error);
