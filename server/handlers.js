@@ -48,12 +48,15 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
 
     var promise = dataSource.set({directErasureId: id}, request.req.body);
 
+    // TODO: sanitize inputs:
+    //    - check for valid UUID if passed from browser https://github.com/afram/is-uuid
+    // TODO: date stamp the erasure here
+
     promise.then(function (response) {
-        console.log("success");
-        var responseAsJSON = JSON.stringify({message: "Success!", savedErasuseId: id});
+        var responseAsJSON = JSON.stringify({message: "Save successful", savedErasuseId: id});
         request.events.onSuccess.fire(responseAsJSON);
     }, function (error) {
-        console.log("error");
+        console.log("error trying to save erasure with id " + id, error);
         var errorAsJSON = JSON.stringify(error);
         request.events.onError.fire({
             message: errorAsJSON
@@ -77,11 +80,10 @@ ca.alanharnum.erasuremaker.server.getErasureHandler.handleRequest = function (re
   var promise = dataSource.get({directErasureId: id});
 
   promise.then(function (response) {
-      console.log("success");
       var responseAsJSON = JSON.stringify(response);
       request.events.onSuccess.fire(responseAsJSON);
   }, function (error) {
-      console.log("error");
+      console.log("error trying to get erasure with id " + id, error);
       var errorAsJSON = JSON.stringify(error);
       request.events.onError.fire({
           message: errorAsJSON
