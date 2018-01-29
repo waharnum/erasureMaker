@@ -4,7 +4,7 @@ var fluid = require("infusion");
 var fs = require("fs");
 var indexingInterval = 300000;
 
-var index = function () {
+var updateErasureIndex = function () {
     console.log("Updating index files");
     var storagePath = "./storage/erasures/";
     var indexesPath = "./storage/indexes/"
@@ -46,10 +46,10 @@ var index = function () {
     });
 };
 
-index();
+updateErasureIndex();
 console.log("Indexing running every " + indexingInterval + " milliseconds");
 
 setInterval(function () {
     console.log("Recurring index job running");
-    index();
+    updateErasureIndex();
 }, indexingInterval);

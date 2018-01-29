@@ -8,6 +8,6 @@ var ca = fluid.registerNamespace("ca");
 require("./server/serverSetup.js");
 require("./server/handlers.js");
 require("./server/dataSources.js");
-require("./server/index.js");
+require("./server/erasureIndexing.js");
 
 var server = ca.alanharnum.erasuremaker.server();
