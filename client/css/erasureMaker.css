@@ -31,15 +31,15 @@
   width: 45rem;
 }
 
-.character {
+.char {
   cursor: pointer;
 }
 
-.fade {
+.fd {
   color: #DDD;
 }
 
-.removed {
+.rm {
   color: #FFF;
 }
 

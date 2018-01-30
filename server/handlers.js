@@ -49,12 +49,12 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
 
     // // check for valid UUID if passed from browser https://github.com/afram/is-uuid
     if(! isuuid.v1(id)) {
-        console.log("Tried to save an erasure with the invalid ID" + id);
+        console.log("Tried to save an erasure with the invalid ID " + id);
         request.events.onError.fire({
-            message: "Could not save erasure",
+            message: "Server error",
             statusCode: 500
         });
-    };
+    }
 
     var promise = dataSource.set({directErasureId: id}, request.req.body);
 
@@ -99,6 +99,4 @@ ca.alanharnum.erasuremaker.server.getErasureHandler.handleRequest = function (re
           message: errorAsJSON
       });
   });
-
-
-}
+};

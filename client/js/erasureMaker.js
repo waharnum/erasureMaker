@@ -76,25 +76,25 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 
         erasureControlsComponent.locate("function-control-erase-all").click(function () {
             erasureTextComponent.locate("character").each(function() {
-              $(this).addClass("fade");
+              $(this).addClass("fd");
           });
         });
 
         erasureControlsComponent.locate("function-control-restore-all").click(function () {
             erasureTextComponent.locate("character").each(function() {
-              $(this).removeClass("fade");
+              $(this).removeClass("fd");
           });
         });
 
         erasureControlsComponent.locate("function-control-remove").click(function () {
             erasureTextComponent.locate("fade").each(function() {
-              $(this).addClass("removed");
+              $(this).addClass("rm");
           });
         });
 
         erasureControlsComponent.locate("function-control-restore").click(function () {
             erasureTextComponent.locate("character").each(function() {
-              $(this).removeClass("removed");
+              $(this).removeClass("rm");
           });
         });
 
@@ -150,8 +150,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
         "text": ".text",
         "source": ".source",
         "paragraph": ".paragraph",
-        "character": ".character",
-        "fade": ".fade",
+        "character": ".char",
+        "fade": ".fd",
         "erasureTitle": ".erasureTitle"
     },
     availableTexts: {
@@ -237,7 +237,7 @@ ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure = function (that)
             var spannedText = [];
 
             splitText.forEach(function (currentValue) {
-              var spanned = "<span class='character'>" + currentValue + "</span>";
+              var spanned = "<span class='char'>" + currentValue + "</span>";
               spannedText.push(spanned);
             });
 
@@ -249,15 +249,15 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
     that.locate("character").each(function (i,e) {
         $(this).click(function () {
           if(that.model.currentMode === "click") {
-            $(this).toggleClass("fade");
+            $(this).toggleClass("fd");
           }
         });
         $(this).mouseenter(function () {
           if(that.model.currentMode === "erase") {
-            $(this).addClass("fade");
+            $(this).addClass("fd");
           }
           if(that.model.currentMode === "restore") {
-            $(this).removeClass("fade");
+            $(this).removeClass("fd");
           }
         });
     });
