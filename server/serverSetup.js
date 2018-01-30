@@ -13,6 +13,20 @@ fluid.defaults("ca.alanharnum.erasuremaker.server", {
             options: {
                 port: 8081,
                 components: {
+                    middlewareHolder: {
+                        type: "kettle.standardMiddleware",
+                        options: {
+                            components: {
+                                urlencoded: {
+                                    options: {
+                                        middlewareOptions: {
+                                            limit: "500kb"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     erasureDataSource: {
                         type: "ca.alanharnum.erasuremaker.server.dataSource.file"
                     },

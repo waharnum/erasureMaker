@@ -44,7 +44,7 @@ fluid.defaults("ca.alanharnum.erasuremaker.server.saveErasureHandler", {
     }
 });
 
-ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (request, dataSource) {
+ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (request, dataSource) {    
     var id = request.req.params.id === "NEW" ? uuidv1() : request.req.params.id;
 
     // // check for valid UUID if passed from browser https://github.com/afram/is-uuid
