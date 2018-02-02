@@ -44,7 +44,7 @@ fluid.defaults("ca.alanharnum.erasuremaker.server.saveErasureHandler", {
     }
 });
 
-ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (request, dataSource) {    
+ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (request, dataSource) {
     var id = request.req.params.id === "NEW" ? uuidv1() : request.req.params.id;
 
     // // check for valid UUID if passed from browser https://github.com/afram/is-uuid
@@ -60,7 +60,6 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
 
     // TODO: sanitize more inputs
     // TODO: date stamp the erasure here
-    // TODO: investigate 413 errors
 
     promise.then(function (response) {
         var responseAsJSON = JSON.stringify({message: "Save successful", savedErasureId: id});
@@ -99,4 +98,32 @@ ca.alanharnum.erasuremaker.server.getErasureHandler.handleRequest = function (re
           message: errorAsJSON
       });
   });
+};
+
+fluid.defaults("ca.alanharnum.erasuremaker.server.getIndexHandler", {
+    gradeNames: ["kettle.request.http"],
+    invokers: {
+        handleRequest: {
+            funcName: "ca.alanharnum.erasuremaker.server.getIndexHandler.handleRequest",
+            args: ["{request}", "{server}.indexDataSource"]
+        }
+    }
+});
+
+ca.alanharnum.erasuremaker.server.getIndexHandler.handleRequest = function (request, dataSource) {
+    var id = request.req.params.id;
+
+    var promise = dataSource.get({directIndexId: id});
+
+    promise.then(function (response) {
+        var responseAsJSON = JSON.stringify(response);
+        request.events.onSuccess.fire(responseAsJSON);
+    }, function (error) {
+        console.log("error trying to get index with id " + id, error);
+        var errorAsJSON = JSON.stringify(error);
+        request.events.onError.fire({
+            message: errorAsJSON
+        });
+    });
+
 };

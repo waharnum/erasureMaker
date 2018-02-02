@@ -28,7 +28,10 @@ fluid.defaults("ca.alanharnum.erasuremaker.server", {
                         }
                     },
                     erasureDataSource: {
-                        type: "ca.alanharnum.erasuremaker.server.dataSource.file"
+                        type: "ca.alanharnum.erasuremaker.server.dataSource.erasure"
+                    },
+                    indexDataSource: {
+                        type: "ca.alanharnum.erasuremaker.server.dataSource.index"
                     },
                     ui: {
                         type: "kettle.middleware.static",
@@ -62,6 +65,11 @@ fluid.defaults("ca.alanharnum.erasuremaker.server.app.handlers", {
         getErasureHandler: {
           type: "ca.alanharnum.erasuremaker.server.getErasureHandler",
           "route": "/erasure/:id",
+          "method": "get"
+        },
+        getIndexHandler: {
+          type: "ca.alanharnum.erasuremaker.server.getIndexHandler",
+          "route": "/indexes/:id",
           "method": "get"
         },
         nodeModulesHandler: {

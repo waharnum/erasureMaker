@@ -1,6 +1,6 @@
 .controls {
   font-family: sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   color: #5555AA;
 }
@@ -23,6 +23,14 @@
   font-size: 125%;
 }
 
+.keyboard-shortcut-indicator::before {
+    content: "["
+}
+
+.keyboard-shortcut-indicator::after {
+    content: "]"
+}
+
 .text {
   font-size: 1.5rem;
 }
@@ -41,9 +49,4 @@
 
 .rm {
   color: #FFF;
-}
-
-.spacer {
-  display: inline-block;
-  width: 1ch;
 }

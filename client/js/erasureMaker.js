@@ -98,12 +98,6 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
           });
         });
 
-        erasureControlsComponent.locate("function-control-finalize").click(function () {
-        erasureTextComponent.locate("fade").each(function() {
-          $(this).html("<span class='spacer'></span>");
-            });
-        });
-
         erasureControlsComponent.locate("function-control-save").click(function () {
             console.log("this should save the erasure");
             var erasureText = erasureTextComponent.locate("text").html();
@@ -274,14 +268,17 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         `
         <form>
             <div class="mode-controls controls">
-                <label class="mode-control-click current-control"><span class="keyboard-shortcut-indicator">[c]</span>lickmode
+                <label class="mode-control-click current-control">
                     <input checked type="radio" name="mode-control-radio" value="click" />
+                    <span class="keyboard-shortcut-indicator">c</span>lickmode
                 </label>
-                <label class="mode-control-erase"><span class="keyboard-shortcut-indicator">[e]</span>rasemode
+                <label class="mode-control-erase">
                     <input type="radio" name="mode-control-radio" value="erase" />
+                    <span class="keyboard-shortcut-indicator">e</span>rasemode
                 </label>
-                <label class="mode-control-restore"><span class="keyboard-shortcut-indicator">[r]</span>estoremode
+                <label class="mode-control-restore">
                     <input type="radio" name="mode-control-radio" value="restore" />
+                    <span class="keyboard-shortcut-indicator">r</span>estoremode
                 </label>
             </div>
             <div class="function-controls controls">
@@ -289,7 +286,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                 <button type="button" class="function-control-restore-all">restoreall</button>
                 <button type="button" class="function-control-remove">removeerased</button>
                 <button type="button" class="function-control-restore">restoreerased</button>
-                <button type="button" class="function-control-finalize">finalize</button>
                 <button type="button" class="function-control-save">save</button>
                 <button type="button" class="function-control-get">get</button>
             </div>
@@ -314,7 +310,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         "function-control-restore-all": ".function-control-restore-all",
         "function-control-remove": ".function-control-remove",
         "function-control-restore": ".function-control-restore",
-        "function-control-finalize": ".function-control-finalize",
         "function-control-save": ".function-control-save",
         "function-control-get": ".function-control-get"
     }
