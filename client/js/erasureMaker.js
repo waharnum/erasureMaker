@@ -1,30 +1,3 @@
-fluid.defaults("ca.alanharnum.erasureMaker.markupAppendingComponent", {
-        listeners: {
-            "onCreate.appendMarkup": {
-                "this": "{that}.container",
-                "method": "append",
-                "args": "{that}.options.strings.markup"
-            },
-            "onCreate.fireOnMarkupAppended": {
-                "func": "{that}.events.onMarkupAppended.fire",
-                "priority": "after:appendMarkup"
-            }
-        },
-        strings: {
-            markup:
-            `
-            <div>
-                Component markup here; a template literal is an easy way to
-                put in a multi-line string.
-            </div>
-            `
-        },
-        events: {
-            "onMarkupAppended": null
-        }
-    }
-);
-
 fluid.defaults("ca.alanharnum.erasureMaker", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
@@ -351,7 +324,3 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
         that.locate("mode-control-erase").removeClass("current-control");
     });
 };
-
-$(document).ready(function () {
-    ca.alanharnum.erasureMaker(".ahc-erasureMaker", {});
-});
