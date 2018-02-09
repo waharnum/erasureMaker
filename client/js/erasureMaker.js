@@ -151,8 +151,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
         markup:
         `
         <div class="erasureTitle"></div>
-        <div class="text"></div>
-        <div class="source"></div>
+        <p class="text"></p>
+        <p class="source"></p>
         `
     },
     listeners: {
