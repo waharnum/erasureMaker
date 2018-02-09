@@ -3,11 +3,14 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
     model: {
         currentMode: "click"
     },
+    events: {
+        "onTextsReady": null
+    },
     components: {
         erasureText: {
             type: "ca.alanharnum.erasureMaker.text",
             container: ".erasureMaker-text",
-            createOnEvent: "onMarkupAppended",
+            createOnEvent: "onTextsReady",
             options: {
                 availableTexts: "{availableErasureTexts}.options.texts",
                 model: {
@@ -18,7 +21,7 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
         erasureControls: {
             type: "ca.alanharnum.erasureMaker.controls",
             container: ".erasureMaker-controls",
-            createOnEvent: "onMarkupAppended",
+            createOnEvent: "onTextsReady",
             options: {
                 model: {
                     currentMode: "{erasureMaker}.model.currentMode"
@@ -33,7 +36,15 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
             }
         },
         availableErasureTexts: {
-            type: "ca.alanharnum.erasureMaker.availableErasureTexts"
+            type: "ca.alanharnum.erasureMaker.availableErasureTexts",
+            createOnEvent: "onMarkupAppended",
+            options: {
+                listeners: {
+                    "onCreate.escalate": {
+                        func: "{erasureMaker}.events.onTextsReady.fire"
+                    }
+                }
+            }
         }
     },
     strings: {
