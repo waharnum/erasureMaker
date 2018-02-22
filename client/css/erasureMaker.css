@@ -1,10 +1,17 @@
 /* https://coolors.co/b7ad99-ff4365-030301-00d9c0-fffff3 */
 
+:root {
+  --main-bg-color: #B7AD99;
+  --main-text-color: #030301;
+  --button-bg-color: #00d9c0;
+  --button-bg-color-hover: #ff4365;
+}
+
 body {
     margin: 0 auto;
     max-width: 50rem;
-    background-color: #B7AD99;
-    color: #030301;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -28,20 +35,26 @@ body {
 
 .function-controls button {
   font-size: 1.5rem;
-  background-color: #CCC;
+  background-color: var(--button-bg-color);
+  border-radius: 6px;
+  border-color: var(--main-text-color);
 }
 
 .function-controls button:hover {
-    background-color: #FFF;
+    background-color: var(--button-bg-color-hover);
 }
 
-.current-control {
-  padding-bottom: 2px;
-  border: 2px solid black;
+.mode-control {
+  padding: 4px;
+}
+
+.mode-control.current-control {
+  border: 2px solid var(--main-text-color);
+  padding: 2px;
 }
 
 .mode-control-click-radio {
-    
+
 }
 
 .keyboard-shortcut-indicator {
