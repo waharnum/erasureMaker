@@ -11,7 +11,6 @@ var updateErasureIndex = function () {
 
     var index = {};
 
-
     fs.readdir(indexesPath, function (err, files) {
         files.forEach(function (filename) {
             if(filename !== ".gitignore") {

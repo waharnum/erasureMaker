@@ -1,6 +1,50 @@
 fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
     gradeNames: "fluid.component",
     texts: {
+        marx: {
+          author: "Karl Marx",
+          title: "Revolution and Counter-Revolution",
+          sourceURL: "http://www.gutenberg.org/cache/epub/32966/pg32966.txt",
+          text:
+          `
+          The Revolution of Vienna may be said to have been made by an almost
+          unanimous population. The bourgeoisie (with the exception of the
+          bankers and stock-jobbers), the petty trading class, the working
+          people, one and all arose at once against a Government detested by
+          all, a Government so universally hated, that the small minority of
+          nobles and money lords which had supported it made itself invisible on
+          the very first attack. The middle classes had been kept in such a
+          degree of political ignorance by Metternich that to them the news from
+          Paris about the reign of Anarchy, Socialism, and terror, and about
+          impending struggles between the class of capitalists and the class of
+          laborers, proved quite unintelligible. They, in their political
+          innocence, either could attach no meaning to these news, or they
+          believed them to be fiendish inventions of Metternich, to frighten
+          them into obedience. They, besides, had never seen working men acting
+          as a class, or stand up for their own distinct class interests. They
+          had, from their past experience, no idea of the possibility of any
+          differences springing up between classes that now were so heartily
+          united in upsetting a Government hated by all. They saw the working
+          people agree with themselves upon all points: a Constitution, Trial by
+          Jury, Liberty of the Press, etc. Thus they were, in March, 1848, at
+          least, heart and soul with the movement, and the movement, on the
+          other hand, at once constituted them the (at least in theory)
+          predominant class of the State.
+
+          But it is the fate of all revolutions that this union of different
+          classes, which in some degree is always the necessary condition of
+          any revolution, cannot subsist long. No sooner is the victory gained
+          against the common enemy than the victors become divided among
+          themselves into different camps, and turn their weapons against each
+          other. It is this rapid and passionate development of class antagonism
+          which, in old and complicated social organisms, makes a revolution
+          such a powerful agent of social and political progress; it is this
+          incessantly quick upshooting of new parties succeeding each other in
+          power, which, during those violent commotions, makes a nation pass in
+          five years over more ground than it would have done in a century under
+          ordinary circumstances.
+          `
+        },
         butler_war: {
             author: "Smedley Butler",
             title: "War Is A Racket",
