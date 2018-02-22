@@ -28,11 +28,20 @@ body {
 
 .function-controls button {
   font-size: 1.5rem;
+  background-color: #CCC;
+}
+
+.function-controls button:hover {
+    background-color: #FFF;
 }
 
 .current-control {
   padding-bottom: 2px;
-  border-bottom: 2px solid black;
+  border: 2px solid black;
+}
+
+.mode-control-click-radio {
+    
 }
 
 .keyboard-shortcut-indicator {
