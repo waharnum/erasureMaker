@@ -25,6 +25,16 @@ body {
   margin: 0.5em 0 0.5em 0;
 }
 
+.mode-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.function-controls {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
 .text {
   font-family: 'Source Code Pro', sans-serif;
   border: 1px dashed var(--main-text-color);
@@ -35,6 +45,10 @@ body {
   color: var(--erasure-text-color);
   font-size: 1.5rem;
   box-shadow: 5px 10px 5px var(--erasure-text-color);
+}
+
+.control-header {
+    font-size: 1.25rem;
 }
 
 .function-controls button {
@@ -54,7 +68,7 @@ body {
 
 .mode-control {
   padding: 4px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .mode-control.current-control {
@@ -62,13 +76,9 @@ body {
   padding: 2px;
 }
 
-.mode-control-click-radio {
-
-}
-
 .keyboard-shortcut-indicator {
   font-weight: bold;
-  font-size: 125%;
+  font-size: 200%;
   text-transform: uppercase;
 }
 
