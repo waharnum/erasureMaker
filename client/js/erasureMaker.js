@@ -258,7 +258,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         markup:
         `
         <form>
-            <h2 class="control-header">Cursor Mode</div>
+            <h2 class="control-header">Cursor Behavior <span class="control-header-explanation">Controls how the cursor interacts with the text. Has keyboard shortcuts.</span></h2>
             <div class="mode-controls controls">
                     <label class="mode-control mode-control-click current-control">
                         <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
@@ -273,7 +273,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                         <span class="keyboard-shortcut-indicator">r</span>estore characters
                     </label>
             </div>
-            <h2 class="control-header">Functions</div>
+            <h2 class="control-header">Functions <span class="control-header-explanation">Operate on the entire text at once.</span></h2>
             <div class="function-controls controls">
                 <button type="button" class="function-control-erase-all">erase all</button>
                 <button type="button" class="function-control-restore-all">restore all</button>
@@ -281,14 +281,14 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                 <button type="button" class="function-control-get">get</button>
             </div>
             <label for="select-erase-style">
-                <h2 class="control-header">Erase Style
+                <h2 class="control-header">Erasing Style <span class="control-header-explanation">Change appearance of erased text.</span>
+                </h2>
                 <select class="erase-style-selector" id="select-erase-style">
                     <option value="faded">Faded</option>
                     <option value="strike-through">Strike Through</option>
                     <option value="blacked-out">Blacked Out</option>
                     <option value="removed">Removed</option>
                 </select>
-                </h2>
             </label>
         </form>
         `

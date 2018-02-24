@@ -51,6 +51,10 @@ body {
     font-size: 1.25rem;
 }
 
+.control-header-explanation {
+    font-size: 0.75rem;
+}
+
 .function-controls button {
   font-size: 1rem;
   background-color: var(--button-bg-color);
