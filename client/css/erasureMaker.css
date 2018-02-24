@@ -98,10 +98,18 @@ body {
   cursor: pointer;
 }
 
-.fd {
-  color: #DDD;
+.eraseStyle-faded .fd {
+  opacity: 0.5;
 }
 
-.rm {
-  color: #FFF;
+.eraseStyle-strike-through .fd {
+  text-decoration: line-through;
+}
+
+.eraseStyle-blacked-out .fd {
+    background-color: var(--erasure-text-color);
+}
+
+.eraseStyle-removed .fd {
+    visibility: hidden;
 }

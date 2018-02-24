@@ -1,7 +1,8 @@
 fluid.defaults("ca.alanharnum.erasureMaker", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
-        currentMode: "click"
+        currentMode: "click",
+        eraseStyle: "faded"
     },
     events: {
         "onTextsReady": null
@@ -14,8 +15,15 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
             options: {
                 availableTexts: "{availableErasureTexts}.options.texts",
                 model: {
-                    currentMode: "{erasureMaker}.model.currentMode"
-                }
+                    currentMode: "{erasureMaker}.model.currentMode",
+                    eraseStyle: "{erasureMaker}.model.eraseStyle"
+                },
+                modelListeners: {
+                    eraseStyle: {
+                        funcName: "ca.alanharnum.erasureMaker.text.changeEraseStyle",
+                        args: ["{that}", "{that}.model.eraseStyle"]
+                    }
+                },
             }
         },
         erasureControls: {
@@ -24,7 +32,8 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
             createOnEvent: "onTextsReady",
             options: {
                 model: {
-                    currentMode: "{erasureMaker}.model.currentMode"
+                    currentMode: "{erasureMaker}.model.currentMode",
+                    eraseStyle: "{erasureMaker}.model.eraseStyle"
                 },
                 listeners: {
                     "onMarkupAppended.addTextFunctionControls": {
@@ -123,7 +132,8 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 fluid.defaults("ca.alanharnum.erasureMaker.text", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
-        currentMode: "click"
+        currentMode: "click",
+        eraseStyle: "faded"
     },
     selectors: {
         "text": ".text",
@@ -151,7 +161,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
         markup:
         `
         <div class="erasureTitle"></div>
-        <p class="text"></p>
+        <p class="text eraseStyle-faded"></p>
         <p class="source"></p>
         `
     },
@@ -172,6 +182,14 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
         }
     }
 });
+
+ca.alanharnum.erasureMaker.text.changeEraseStyle = function (erasureTextComponent, eraseStyle) {
+    console.log("ca.alanharnum.erasureMaker.text.changeEraseStyle");
+    var text = erasureTextComponent.locate("text");
+    var eraseStyleClass = "eraseStyle-" + eraseStyle;
+    text.toggleClass();
+    text.addClass("text " + eraseStyleClass);
+};
 
 ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
     function getRandomInt(max) {
@@ -245,7 +263,8 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
 fluid.defaults("ca.alanharnum.erasureMaker.controls", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
-        currentMode: "click"
+        currentMode: "click",
+        eraseStyle: "faded"
     },
     strings: {
         markup:
@@ -275,6 +294,16 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
                 <button type="button" class="function-control-save">save</button>
                 <button type="button" class="function-control-get">get</button>
             </div>
+            <label for="select-erase-style">
+                <h2 class="control-header">Erase Style
+                <select class="erase-style-selector" id="select-erase-style">
+                    <option value="faded">Faded</option>
+                    <option value="strike-through">Strike Through</option>
+                    <option value="blacked-out">Blacked Out</option>
+                    <option value="removed">Removed</option>
+                </select>
+                </h2>
+            </label>
         </form>
         `
     },
@@ -285,6 +314,10 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         },
         "onMarkupAppended.addModeControls": {
             func: "ca.alanharnum.erasureMaker.controls.addModeControls",
+            args: ["{that}"]
+        },
+        "onMarkupAppended.addEraseStyleControl": {
+            func: "ca.alanharnum.erasureMaker.controls.addEraseStyleControl",
             args: ["{that}"]
         }
     },
@@ -297,7 +330,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         "function-control-remove": ".function-control-remove",
         "function-control-restore": ".function-control-restore",
         "function-control-save": ".function-control-save",
-        "function-control-get": ".function-control-get"
+        "function-control-get": ".function-control-get",
+        "erase-style-selector": ".erase-style-selector"
     }
 });
 
@@ -336,4 +370,12 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
         that.locate("mode-control-click").removeClass("current-control");
         that.locate("mode-control-erase").removeClass("current-control");
     });
+};
+
+ca.alanharnum.erasureMaker.controls.addEraseStyleControl = function (that) {
+    var eraseStyleSelector = that.locate("erase-style-selector").change(function () {
+        var val = $(this).val();
+        that.applier.change("eraseStyle", val);
+    });
+
 };
