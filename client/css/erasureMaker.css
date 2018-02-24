@@ -11,10 +11,14 @@
 
 body {
     margin: 0 auto;
-    max-width: 50rem;
+    max-width: 52rem;
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     font-family: 'Source Sans Pro', sans-serif;
+}
+
+.erasureMaker-pageContainer {
+    margin: 1rem 1rem;
 }
 
 .erasureMaker-pageTitle {
