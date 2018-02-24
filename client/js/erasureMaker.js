@@ -253,15 +253,15 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
         <form>
             <div class="mode-controls controls">
                 <label class="mode-control mode-control-click current-control">
-                    <input class="mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
+                    <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
                     <span class="keyboard-shortcut-indicator">c</span>lickmode
                 </label>
                 <label class="mode-control mode-control-erase">
-                    <input class="mode-control-click-radio" type="radio" name="mode-control-radio" value="erase" />
+                    <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="erase" />
                     <span class="keyboard-shortcut-indicator">e</span>rasemode
                 </label>
                 <label class="mode-control mode-control-restore">
-                    <input class="mode-control-click-radio" type="radio" name="mode-control-radio" value="restore" />
+                    <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="restore" />
                     <span class="keyboard-shortcut-indicator">r</span>estoremode
                 </label>
             </div>
