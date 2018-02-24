@@ -103,7 +103,7 @@ body {
 }
 
 .eraseStyle-strike-through .fd {
-  text-decoration: line-through;
+  text-decoration-line: line-through;    
 }
 
 .eraseStyle-blacked-out .fd {
