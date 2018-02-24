@@ -1,0 +1,5 @@
+node_modules
+package-lock.json
+.git
+# The container creates its own storage structure on startup
+storage

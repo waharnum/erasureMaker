@@ -11,19 +11,13 @@ var updateErasureIndex = function () {
 
     var index = {};
 
-    fs.readdir(indexesPath, function (err, files) {
-        files.forEach(function (filename) {
-            if(filename !== ".gitignore") {
-                var filePath = indexesPath + filename;
-                fs.unlink(filePath, function (error) {
-                    if(error) {
-                        console.log("Error deleting " + filePath, error);
-                    } else {
-                        console.log("Deleted index " + filePath);
-                    }
-                });
-            };
-        });
+    var files = fs.readdirSync(indexesPath);
+
+    files.forEach(function (filename) {
+        if(filename !== ".gitignore") {
+            var filePath = indexesPath + filename;
+            fs.unlinkSync(filePath);        
+        };
     });
 
     fs.readdir(storagePath, function(err, files) {
