@@ -69,25 +69,13 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 
         erasureControlsComponent.locate("function-control-erase-all").click(function () {
             erasureTextComponent.locate("character").each(function() {
-              $(this).addClass("fd");
+              $(this).addClass("er");
           });
         });
 
         erasureControlsComponent.locate("function-control-restore-all").click(function () {
             erasureTextComponent.locate("character").each(function() {
-              $(this).removeClass("fd");
-          });
-        });
-
-        erasureControlsComponent.locate("function-control-remove").click(function () {
-            erasureTextComponent.locate("fade").each(function() {
-              $(this).addClass("rm");
-          });
-        });
-
-        erasureControlsComponent.locate("function-control-restore").click(function () {
-            erasureTextComponent.locate("character").each(function() {
-              $(this).removeClass("rm");
+              $(this).removeClass("er");
           });
         });
 
@@ -246,15 +234,15 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
     that.locate("character").each(function (i,e) {
         $(this).click(function () {
           if(that.model.currentMode === "click") {
-            $(this).toggleClass("fd");
+            $(this).toggleClass("er");
           }
         });
         $(this).mouseenter(function () {
           if(that.model.currentMode === "erase") {
-            $(this).addClass("fd");
+            $(this).addClass("er");
           }
           if(that.model.currentMode === "restore") {
-            $(this).removeClass("fd");
+            $(this).removeClass("er");
           }
         });
     });
@@ -289,8 +277,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls", {
             <div class="function-controls controls">
                 <button type="button" class="function-control-erase-all">erase all</button>
                 <button type="button" class="function-control-restore-all">restore all</button>
-                <button type="button" class="function-control-remove">remove erased</button>
-                <button type="button" class="function-control-restore">restore erased</button>
                 <button type="button" class="function-control-save">save</button>
                 <button type="button" class="function-control-get">get</button>
             </div>

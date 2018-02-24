@@ -32,7 +32,7 @@ body {
 
 .function-controls {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .text {
@@ -98,18 +98,22 @@ body {
   cursor: pointer;
 }
 
-.eraseStyle-faded .fd {
+.erase-style-selector {
+
+}
+
+.eraseStyle-faded .er {
   opacity: 0.5;
 }
 
-.eraseStyle-strike-through .fd {
-  text-decoration-line: line-through;    
+.eraseStyle-strike-through .er {
+  text-decoration-line: line-through;
 }
 
-.eraseStyle-blacked-out .fd {
+.eraseStyle-blacked-out .er {
     background-color: var(--erasure-text-color);
 }
 
-.eraseStyle-removed .fd {
+.eraseStyle-removed .er {
     visibility: hidden;
 }
