@@ -9,7 +9,7 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
     },
     components: {
         erasureText: {
-            type: "ca.alanharnum.erasureMaker.text",
+            type: "ca.alanharnum.erasureMaker.text.edit",
             container: ".erasureMaker-text",
             createOnEvent: "onTextsReady",
             options: {
@@ -117,10 +117,9 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 
 };
 
-fluid.defaults("ca.alanharnum.erasureMaker.text", {
+fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
-        currentMode: "click",
         eraseStyle: "faded"
     },
     selectors: {
@@ -162,7 +161,16 @@ fluid.defaults("ca.alanharnum.erasureMaker.text", {
             func: "ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure",
             args: ["{that}"],
             priority: "after:addSourceText"
-        },
+        }
+    }
+});
+
+fluid.defaults("ca.alanharnum.erasureMaker.text.edit", {
+    gradeNames: ["ca.alanharnum.erasureMaker.text.view"],
+    model: {
+        currentMode: "click",
+    },
+    listeners: {
         "onMarkupAppended.addCharacterErasureEvents": {
             func: "ca.alanharnum.erasureMaker.text.addCharacterErasureEvents",
             args: ["{that}"],
@@ -257,28 +265,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.view", {
         markup:
         `
         <form>
-            <h2 class="control-header">Cursor Behavior <span class="control-header-explanation">Controls how the cursor interacts with the text. Has keyboard shortcuts.</span></h2>
-            <div class="mode-controls controls">
-                    <label class="mode-control mode-control-click current-control">
-                        <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
-                        <span class="keyboard-shortcut-indicator">c</span>lick to toggle characters
-                    </label>
-                    <label class="mode-control mode-control-erase">
-                        <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="erase" />
-                        <span class="keyboard-shortcut-indicator">e</span>rase characters
-                    </label>
-                    <label class="mode-control mode-control-restore">
-                        <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="restore" />
-                        <span class="keyboard-shortcut-indicator">r</span>estore characters
-                    </label>
-            </div>
-            <h2 class="control-header">Functions <span class="control-header-explanation">Operate on the entire text at once.</span></h2>
-            <div class="function-controls controls">
-                <button type="button" class="function-control-erase-all">erase all</button>
-                <button type="button" class="function-control-restore-all">restore all</button>
-                <button type="button" class="function-control-save">save</button>
-                <button type="button" class="function-control-get">get</button>
-            </div>
             <label for="select-erase-style">
                 <h2 class="control-header">Erasing Style <span class="control-header-explanation">Change appearance of erased text.</span>
                 </h2>
@@ -352,7 +338,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
             func: "ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts",
             args: ["{that}"]
         },
-        "onMarkupAppended.addKeyboardShortcuts": {
+        "onMarkupAppended.addModeControls": {
             func: "ca.alanharnum.erasureMaker.controls.addModeControls",
             args: ["{that}"]
         }
