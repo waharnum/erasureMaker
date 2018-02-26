@@ -38,7 +38,10 @@
             var erasureView = ca.alanharnum.erasureMakerView(".ahc-erasureMaker", {});
             if(erasureId) {
                 erasureView.applier.change("displayedErasure", erasureId);
+                erasureView.erasureControls.locate("erase-style-selector").val("blacked-out");
+                erasureView.erasureControls.locate("erase-style-selector").change();
             }
+
             // erasureView.applier.change("eraseStyle", "blacked-out");
         });
     </script>
