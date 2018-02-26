@@ -1,22 +1,29 @@
-fluid.defaults("ca.alanharnum.erasureMaker", {
+fluid.defaults("ca.alanharnum.erasureMakerView", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
         currentMode: "click",
         eraseStyle: "faded"
+        // displayedErasure: null
+    },
+    modelListeners: {
+        displayedErasure: {
+            func: "ca.alanharnum.erasureMaker.loadErasure",
+            args: ["{erasureText}", "{that}.model.displayedErasure"]
+        }
     },
     events: {
         "onTextsReady": null
     },
     components: {
         erasureText: {
-            type: "ca.alanharnum.erasureMaker.text.edit",
+            type: "ca.alanharnum.erasureMaker.text.view",
             container: ".erasureMaker-text",
             createOnEvent: "onTextsReady",
             options: {
                 availableTexts: "{availableErasureTexts}.options.texts",
                 model: {
-                    currentMode: "{erasureMaker}.model.currentMode",
-                    eraseStyle: "{erasureMaker}.model.eraseStyle"
+                    currentMode: "{erasureMakerView}.model.currentMode",
+                    eraseStyle: "{erasureMakerView}.model.eraseStyle"
                 },
                 modelListeners: {
                     eraseStyle: {
@@ -27,21 +34,13 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
             }
         },
         erasureControls: {
-            type: "ca.alanharnum.erasureMaker.controls.edit",
+            type: "ca.alanharnum.erasureMaker.controls.view",
             container: ".erasureMaker-controls",
             createOnEvent: "onTextsReady",
             options: {
                 model: {
-                    currentMode: "{erasureMaker}.model.currentMode",
-                    eraseStyle: "{erasureMaker}.model.eraseStyle"
-                },
-                listeners: {
-                    "onMarkupAppended.addTextFunctionControls": {
-                        func: "ca.alanharnum.erasureMaker.addTextFunctionControls",
-                        args: ["{that}", "{erasureText}"]
-                    }
+                    eraseStyle: "{erasureMakerView}.model.eraseStyle"
                 }
-
             }
         },
         availableErasureTexts: {
@@ -50,7 +49,7 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
             options: {
                 listeners: {
                     "onCreate.escalate": {
-                        func: "{erasureMaker}.events.onTextsReady.fire"
+                        func: "{erasureMakerView}.events.onTextsReady.fire"
                     }
                 }
             }
@@ -62,6 +61,29 @@ fluid.defaults("ca.alanharnum.erasureMaker", {
         <div class="erasureMaker-controls"></div>
         <div class="erasureMaker-text"></div>
         `
+    }
+});
+
+fluid.defaults("ca.alanharnum.erasureMakerEdit", {
+    gradeNames: ["ca.alanharnum.erasureMakerView"],
+    components: {
+        erasureText: {
+            type: "ca.alanharnum.erasureMaker.text.edit"
+        },
+        erasureControls: {
+            type: "ca.alanharnum.erasureMaker.controls.edit",
+            options: {
+                model: {
+                    currentMode: "{erasureMakerView}.model.currentMode",                    
+                },
+                listeners: {
+                    "onMarkupAppended.addTextFunctionControls": {
+                        func: "ca.alanharnum.erasureMaker.addTextFunctionControls",
+                        args: ["{that}", "{erasureText}"]
+                    }
+                }
+            }
+        }
     }
 });
 
@@ -102,19 +124,23 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
         erasureControlsComponent.locate("function-control-get").click(function () {
             console.log("this should load an existing erasure");
              var erasureId = prompt("Enter the erasure ID", "Untitled");
-             var url = "http://localhost:8081/erasure/" + erasureId;
-             console.log(url);
-             $.get("http://localhost:8081/erasure/" + erasureId, function ( data ) {
-                 console.log("it worked!", data);
-                 var erasure = JSON.parse(data);
-                 erasureTextComponent.locate("text").html(erasure.text);
-                 var erasureTitle = erasure.title;
-                 var sourceMarkup = `Original text from <em>${erasure.sourceTextTitle}</em> by ${erasure.sourceTextAuthor} (<a href='${erasure.sourceURL}'>source</a>)`;
-                 erasureTextComponent.locate("source").html(sourceMarkup);
-                 erasureTextComponent.locate("erasureTitle").html(`<h2>${erasureTitle}</h2>`);
-            });
+             ca.alanharnum.erasureMaker.loadErasure(erasureTextComponent, erasureId);
         });
 
+};
+
+ca.alanharnum.erasureMaker.loadErasure = function (erasureTextComponent, erasureId) {
+    var url = "http://localhost:8081/erasure/" + erasureId;
+    console.log(url);
+    $.get("http://localhost:8081/erasure/" + erasureId, function ( data ) {
+        console.log("it worked!", data);
+        var erasure = JSON.parse(data);
+        erasureTextComponent.locate("text").html(erasure.text);
+        var erasureTitle = erasure.title;
+        var sourceMarkup = `Original text from <em>${erasure.sourceTextTitle}</em> by ${erasure.sourceTextAuthor} (<a href='${erasure.sourceURL}'>source</a>)`;
+        erasureTextComponent.locate("source").html(sourceMarkup);
+        erasureTextComponent.locate("erasureTitle").html(`<h2>${erasureTitle}</h2>`);
+   });
 };
 
 fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
