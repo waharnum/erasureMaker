@@ -8,6 +8,6 @@ docker run -p 8081:8081 erasuremaker
 
 # Docker With Persistent Storage
 
-docker run -p 8081:8081 -v erasure-maker-storage:/erasuremaker/storage erasuremaker
+docker volume create erasure-maker-storage
 
-docker run --rm -i -v erasure-maker-storage:/tmp/myvolume busybox find /tmp/myvolume
+docker run -p 8081:8081 -v erasure-maker-storage:/erasuremaker/storage erasuremaker

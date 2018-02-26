@@ -46,7 +46,7 @@ ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {
             indexItemDOM.append("<ul></ul>")
             fluid.each(erasureIndex, function (erasureIndexItem) {
                 var list = indexItemDOM.find("ul");
-                list.append(`<li>${erasureIndexItem.erasureTitle}</li>`)
+                list.append(`<li>${erasureIndexItem.erasureTitle} : ${erasureIndexItem.erasureKey}</li>`);
             });
         });
     })

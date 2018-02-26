@@ -16,8 +16,8 @@ var updateErasureIndex = function () {
     files.forEach(function (filename) {
         if(filename !== ".gitignore") {
             var filePath = indexesPath + filename;
-            fs.unlinkSync(filePath);        
-        };
+            fs.unlinkSync(filePath);
+        }
     });
 
     fs.readdir(storagePath, function(err, files) {
