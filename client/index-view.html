@@ -20,9 +20,26 @@
     </div>
 
     <script>
+        // classic query string parser via
+        // https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+        ca.alanharnum.erasureMaker.getParameterByName = function (name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        };
+
+        var erasureId = ca.alanharnum.erasureMaker.getParameterByName("erasureId");
+
         $(document).ready(function () {
             var erasureView = ca.alanharnum.erasureMakerView(".ahc-erasureMaker", {});
-            // erasureView.applier.change("8eb8b520-1b0b-11e8-ba63-7f26aa4ce879");
+            if(erasureId) {
+                erasureView.applier.change("displayedErasure", erasureId);
+            }
+            // erasureView.applier.change("eraseStyle", "blacked-out");
         });
     </script>
 

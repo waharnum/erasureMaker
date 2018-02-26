@@ -1,7 +1,6 @@
 fluid.defaults("ca.alanharnum.erasureMakerView", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
-        currentMode: "click",
         eraseStyle: "faded"
         // displayedErasure: null
     },
@@ -66,6 +65,9 @@ fluid.defaults("ca.alanharnum.erasureMakerView", {
 
 fluid.defaults("ca.alanharnum.erasureMakerEdit", {
     gradeNames: ["ca.alanharnum.erasureMakerView"],
+    model: {
+        currentMode: "click"
+    },
     components: {
         erasureText: {
             type: "ca.alanharnum.erasureMaker.text.edit"
@@ -74,7 +76,7 @@ fluid.defaults("ca.alanharnum.erasureMakerEdit", {
             type: "ca.alanharnum.erasureMaker.controls.edit",
             options: {
                 model: {
-                    currentMode: "{erasureMakerView}.model.currentMode",                    
+                    currentMode: "{erasureMakerView}.model.currentMode",
                 },
                 listeners: {
                     "onMarkupAppended.addTextFunctionControls": {
@@ -130,6 +132,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 };
 
 ca.alanharnum.erasureMaker.loadErasure = function (erasureTextComponent, erasureId) {
+    console.log("loadErasure")
     var url = "http://localhost:8081/erasure/" + erasureId;
     console.log(url);
     $.get("http://localhost:8081/erasure/" + erasureId, function ( data ) {
@@ -179,15 +182,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         `
     },
     listeners: {
-        "onMarkupAppended.addSourceText": {
-            func: "ca.alanharnum.erasureMaker.text.addSourceText",
-            args: ["{that}"]
-        },
-        "onMarkupAppended.addErasureByCharacterStructure": {
-            func: "ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure",
-            args: ["{that}"],
-            priority: "after:addSourceText"
-        }
+
     }
 });
 
@@ -197,6 +192,15 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.edit", {
         currentMode: "click",
     },
     listeners: {
+        "onMarkupAppended.addSourceText": {
+            func: "ca.alanharnum.erasureMaker.text.addSourceText",
+            args: ["{that}"]
+        },
+        "onMarkupAppended.addErasureByCharacterStructure": {
+            func: "ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure",
+            args: ["{that}"],
+            priority: "after:addSourceText"
+        },
         "onMarkupAppended.addCharacterErasureEvents": {
             func: "ca.alanharnum.erasureMaker.text.addCharacterErasureEvents",
             args: ["{that}"],
