@@ -17,6 +17,10 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+a {
+  color: var(--main-text-color);
+}
+
 .erasureMaker-pageContainer {
     margin: 1rem 1rem;
 }
