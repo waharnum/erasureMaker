@@ -24,11 +24,11 @@ fluid.defaults("ca.alanharnum.erasureMaker.textIndex", {
 });
 
 ca.alanharnum.erasureMaker.textIndex.generateMarkup = function (availableErasureTexts) {
-    var indexMarkup = "";
+    var indexMarkup = "<h2>Available Text Excerpts</h2>";
     fluid.each(availableErasureTexts.options.texts, function (text, textKey) {
         var textMarkup =
         `
-            <h2 data-textKey="${textKey}" class="index-item">${text.title}, ${text.author}</h2>
+            <h3 data-textKey="${textKey}" class="index-item">${text.title}, ${text.author}</h3>
         `
         indexMarkup = indexMarkup + textMarkup;
     })
