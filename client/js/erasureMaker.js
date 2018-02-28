@@ -289,28 +289,39 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
     });
 };
 
-ca.alanharnum.erasureMaker.text.toggleWord = function (character) {
+ca.alanharnum.erasureMaker.text.toggleWord = function (characterSelector) {
   var prev, next;
-  prev = ca.alanharnum.erasureMaker.text.getAdjacentCharacters(character, "prev");
-  next = ca.alanharnum.erasureMaker.text.getAdjacentCharacters(character, "next");
-  var word = $(character).add(prev).add(next);
+  prev = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "prev");
+  next = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "next");
+  var word = $(characterSelector).add(prev).add(next);
   word.toggleClass("er");
 };
 
-ca.alanharnum.erasureMaker.text.getAdjacentCharacters = function (character, direction) {
-  var adjacentCharacters = $([]);
-  var allWordCharactersFound = false;
-  var currentChar = character;
-  while (!allWordCharactersFound) {
-    currentChar = $(currentChar)[direction]();
-    if(currentChar.text() === " ") {
-      allWordCharactersFound = true;
+ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors = function (characterSelector, direction) {
+  var adjacentcharacterSelectors = $([]);
+  if(ca.alanharnum.erasureMaker.text.isPunctuationCharacter($(characterSelector).text())) {
+    return adjacentcharacterSelectors;
+  }
+  var allWordcharacterSelectorsFound = false;
+  var currentCharacterSelector = characterSelector;
+  while (!allWordcharacterSelectorsFound) {
+    currentCharacterSelector = $(currentCharacterSelector)[direction]();
+    if(ca.alanharnum.erasureMaker.text.isPunctuationCharacter(currentCharacterSelector.text())) {
+      allWordcharacterSelectorsFound = true;
     } else {
-      adjacentCharacters = adjacentCharacters.add(currentChar);
+      adjacentcharacterSelectors = adjacentcharacterSelectors.add(currentCharacterSelector);
     }
   }
-  return adjacentCharacters;
+  return adjacentcharacterSelectors;
 }
+
+ca.alanharnum.erasureMaker.text.isPunctuationCharacter = function (character) {
+  // python.punctuation definition, via https://stackoverflow.com/questions/4328500/how-can-i-strip-all-punctuation-from-a-string-in-javascript-using-regex#comment39981263_4328722
+  var punctuationCharacters = " ['!\"“”#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']";
+  if (punctuationCharacters.indexOf(character) > -1) {
+    return true;
+  } else return false;
+};
 
 fluid.defaults("ca.alanharnum.erasureMaker.controls.view", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
