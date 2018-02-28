@@ -28,7 +28,7 @@ ca.alanharnum.erasureMaker.textIndex.generateMarkup = function (availableErasure
     fluid.each(availableErasureTexts.options.texts, function (text, textKey) {
         var textMarkup =
         `
-            <p data-textKey="${textKey}" class="index-item">${text.title}, ${text.author}</p>
+            <h2 data-textKey="${textKey}" class="index-item">${text.title}, ${text.author}</h2>
         `
         indexMarkup = indexMarkup + textMarkup;
     })
@@ -43,9 +43,9 @@ ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {
         var indexURL = `http://localhost:8081/indexes/${textKey}`;
         $.get(indexURL, function (data) {
             var erasureIndex = JSON.parse(data);
-            indexItemDOM.append("<ul></ul>")
+            indexItemDOM.after("<ul></ul>")
             fluid.each(erasureIndex, function (erasureIndexItem) {
-                var list = indexItemDOM.find("ul");
+                var list = indexItemDOM.next("ul");
                 list.append(`<li><a href="view.html?erasureId=${erasureIndexItem.erasureKey}">${erasureIndexItem.erasureTitle}</a></li>`);
             });
         });
