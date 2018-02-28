@@ -358,7 +358,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
             <div class="mode-controls controls">
                     <label class="mode-control mode-control-click current-control">
                         <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
-                        <span class="keyboard-shortcut-indicator">c</span>lick to toggle characters
+                        click to toggle <span class="keyboard-shortcut-indicator">c</span>haracters
                     </label>
                     <label class="mode-control mode-control-word">
                         <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
@@ -366,11 +366,11 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
                     </label>
                     <label class="mode-control mode-control-erase">
                         <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="erase" />
-                        <span class="keyboard-shortcut-indicator">e</span>rase characters
+                        drag cursor to <span class="keyboard-shortcut-indicator">e</span>rase characters
                     </label>
                     <label class="mode-control mode-control-restore">
                         <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="restore" />
-                        <span class="keyboard-shortcut-indicator">r</span>estore characters
+                        drag cursor to <span class="keyboard-shortcut-indicator">r</span>estore characters
                     </label>
             </div>
             <h2 class="control-header">Functions <span class="control-header-explanation">Operate on the entire text at once.</span></h2>
