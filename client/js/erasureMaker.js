@@ -103,8 +103,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
           });
         });
 
-        erasureControlsComponent.locate("function-control-save").click(function () {
-            console.log("this should save the erasure");
+        erasureControlsComponent.locate("function-control-save").click(function () {            
             var erasureText = erasureTextComponent.locate("text").html();
 
             var erasureTitle = prompt("Enter your erasure's title", "Untitled");

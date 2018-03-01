@@ -45,9 +45,8 @@ fluid.defaults("ca.alanharnum.erasuremaker.server.saveErasureHandler", {
 });
 
 ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (request, dataSource) {
-    var id = request.req.params.id === "NEW" ? uuidv1() : request.req.params.id;
+    var id = uuidv1();
 
-    // // check for valid UUID if passed from browser https://github.com/afram/is-uuid
     if(! isuuid.v1(id)) {
         console.log("Tried to save an erasure with the invalid ID " + id);
         request.events.onError.fire({
@@ -58,7 +57,7 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
 
     var promise = dataSource.set({directErasureId: id}, request.req.body);
 
-    // TODO: sanitize more inputs
+    // TODO: sanitize more inputs?
     // TODO: date stamp the erasure here
 
     promise.then(function (response) {
