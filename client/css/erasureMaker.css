@@ -26,7 +26,17 @@ a {
 }
 
 .erasureMaker-pageTitle {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    display: inline-block;
+}
+
+.erasureMaker-pageSubtitle {
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.erasureMaker-pageTitle-erasure {
+  text-decoration: line-through;
 }
 
 .controls {
