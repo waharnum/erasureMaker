@@ -63,7 +63,7 @@ a {
   margin: 0 auto;
   background-color: var(--erasure-bg-color);
   color: var(--erasure-text-color);
-  font-size: 1.5rem;
+  font-size: 1rem;
   box-shadow: 5px 10px 5px var(--erasure-text-color);
 }
 
@@ -120,9 +120,13 @@ a {
     content: "]"
 }
 
+.text {
+    max-width: 40rem;
+    min-width: 40rem;
+}
+
 .paragraph {
-  max-width: 40rem;
-  min-width: 40rem;
+
 }
 
 .erasureMaker-editPage .char {
