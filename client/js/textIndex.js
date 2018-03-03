@@ -40,7 +40,7 @@ ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {
     fluid.each(indexItems, function (indexItem) {
         var indexItemDOM = $(indexItem);
         var textKey = indexItemDOM.attr("data-textKey");
-        var indexURL = `http://localhost:8081/indexes/${textKey}`;
+        var indexURL = `http://${window.location.host}/indexes/${textKey}`;
         $.get(indexURL, function (data) {
             var erasureIndex = JSON.parse(data);
             indexItemDOM.after("<ul></ul>")

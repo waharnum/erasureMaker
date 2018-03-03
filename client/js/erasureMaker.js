@@ -103,7 +103,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
           });
         });
 
-        erasureControlsComponent.locate("function-control-save").click(function () {            
+        erasureControlsComponent.locate("function-control-save").click(function () {
             var erasureText = erasureTextComponent.locate("text").html();
 
             var erasureTitle = prompt("Enter your erasure's title", "Untitled");
@@ -116,14 +116,13 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                                 sourceTextTitle: erasureTextComponent.sourceText.title,
                             };
 
-            $.post("http://localhost:8081/erasure/NEW", erasureData, function ( data ) {
+            $.post(`http://${window.location.host}/erasure/NEW`, erasureData, function ( data ) {
                 console.log("it worked!", data);
             });
         });
 
 
         erasureControlsComponent.locate("function-control-get").click(function () {
-            console.log("this should load an existing erasure");
              var erasureId = prompt("Enter the erasure ID", "Untitled");
              ca.alanharnum.erasureMaker.loadErasure(erasureTextComponent, erasureId);
         });
@@ -131,11 +130,8 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 };
 
 ca.alanharnum.erasureMaker.loadErasure = function (erasureTextComponent, erasureId) {
-    console.log("loadErasure")
-    var url = "http://localhost:8081/erasure/" + erasureId;
-    console.log(url);
-    $.get("http://localhost:8081/erasure/" + erasureId, function ( data ) {
-        console.log("it worked!", data);
+    var url = `http://${window.location.host}/erasure/` + erasureId;
+    $.get(`http://${window.location.host}/erasure/` + erasureId, function ( data ) {
         var erasure = JSON.parse(data);
         erasureTextComponent.locate("text").html(erasure.text);
         var erasureTitle = erasure.title;
@@ -209,7 +205,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.edit", {
 });
 
 ca.alanharnum.erasureMaker.text.changeEraseStyle = function (erasureTextComponent, eraseStyle) {
-    console.log("ca.alanharnum.erasureMaker.text.changeEraseStyle");
     var text = erasureTextComponent.locate("text");
     var eraseStyleClass = "eraseStyle-" + eraseStyle;
     text.toggleClass();
