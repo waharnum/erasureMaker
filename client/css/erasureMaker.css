@@ -121,7 +121,8 @@ a {
 }
 
 .paragraph {
-  max-width: 45rem;
+  max-width: 40rem;
+  min-width: 40rem;
 }
 
 .erasureMaker-editPage .char {
