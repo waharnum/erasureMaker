@@ -24,11 +24,11 @@ fluid.defaults("ca.alanharnum.erasureMaker.textIndex", {
 });
 
 ca.alanharnum.erasureMaker.textIndex.generateMarkup = function (availableErasureTexts) {
-    var indexMarkup = "";
+    var indexMarkup = "<h2>Available Text Excerpts</h2>";
     fluid.each(availableErasureTexts.options.texts, function (text, textKey) {
         var textMarkup =
         `
-            <p data-textKey="${textKey}" class="index-item">${text.title}, ${text.author}</p>
+            <h3 data-textKey="${textKey}" class="index-item">${text.title}, ${text.author}</h3>
         `
         indexMarkup = indexMarkup + textMarkup;
     })
@@ -43,9 +43,9 @@ ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {
         var indexURL = `http://localhost:8081/indexes/${textKey}`;
         $.get(indexURL, function (data) {
             var erasureIndex = JSON.parse(data);
-            indexItemDOM.append("<ul></ul>")
+            indexItemDOM.after("<ul></ul>")
             fluid.each(erasureIndex, function (erasureIndexItem) {
-                var list = indexItemDOM.find("ul");
+                var list = indexItemDOM.next("ul");
                 list.append(`<li><a href="view.html?erasureId=${erasureIndexItem.erasureKey}">${erasureIndexItem.erasureTitle}</a></li>`);
             });
         });

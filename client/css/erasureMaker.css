@@ -17,12 +17,26 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+a {
+  color: var(--main-text-color);
+}
+
 .erasureMaker-pageContainer {
     margin: 1rem 1rem;
 }
 
 .erasureMaker-pageTitle {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    display: inline-block;
+}
+
+.erasureMaker-pageSubtitle {
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.erasureMaker-pageTitle-erasure {
+  text-decoration: line-through;
 }
 
 .controls {
@@ -110,7 +124,7 @@ body {
   max-width: 45rem;
 }
 
-.char {
+.erasureMaker-editPage .char {
   cursor: pointer;
 }
 
