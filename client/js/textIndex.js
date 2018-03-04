@@ -43,10 +43,10 @@ ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {
         var indexURL = `http://${window.location.host}/indexes/${textKey}`;
         $.get(indexURL, function (data) {
             var erasureIndex = JSON.parse(data);
-            indexItemDOM.after("<ul></ul>")
+            indexItemDOM.after("<ol class='index-list'></ol>")
             fluid.each(erasureIndex, function (erasureIndexItem) {
-                var list = indexItemDOM.next("ul");
-                list.append(`<li><a href="view.html?erasureId=${erasureIndexItem.erasureKey}">${erasureIndexItem.erasureTitle}</a></li>`);
+                var list = indexItemDOM.next("ol");
+                list.append(`<li class="index-list-item"><a href="view.html?erasureId=${erasureIndexItem.erasureKey}">${erasureIndexItem.erasureTitle}</a></li>`);
             });
         });
     })

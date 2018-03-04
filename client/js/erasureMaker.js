@@ -121,12 +121,6 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
             });
         });
 
-
-        erasureControlsComponent.locate("function-control-get").click(function () {
-             var erasureId = prompt("Enter the erasure ID", "Untitled");
-             ca.alanharnum.erasureMaker.loadErasure(erasureTextComponent, erasureId);
-        });
-
 };
 
 ca.alanharnum.erasureMaker.loadErasure = function (erasureTextComponent, erasureId) {
@@ -383,7 +377,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
                 <button type="button" class="function-control-erase-all">erase all</button>
                 <button type="button" class="function-control-restore-all">restore all</button>
                 <button type="button" class="function-control-save">save</button>
-                <button type="button" class="function-control-get">get</button>
             </div>
             <label for="select-erase-style">
                 <h2 class="control-header">Erasing Style <span class="control-header-explanation">Change appearance of erased text.</span>
@@ -415,8 +408,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
         "mode-control-restore": ".mode-control-restore",
         "function-control-erase-all": ".function-control-erase-all",
         "function-control-restore-all": ".function-control-restore-all",
-        "function-control-save": ".function-control-save",
-        "function-control-get": ".function-control-get",
+        "function-control-save": ".function-control-save"        
     }
 });
 

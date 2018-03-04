@@ -28,7 +28,7 @@ a {
 
 .erasureMaker-pageTitle {
     font-size: 2.5rem;
-    display: inline-block;
+    display: inline-block;    
 }
 
 .erasureMaker-pageSubtitle {
@@ -66,6 +66,8 @@ a {
   color: var(--erasure-text-color);
   font-size: 1rem;
   box-shadow: 5px 10px 5px var(--erasure-text-color);
+  max-width: 40rem;
+  min-width: 40rem;
 }
 
 .control-header {
@@ -121,11 +123,6 @@ a {
     content: "]"
 }
 
-.text {
-    max-width: 40rem;
-    min-width: 40rem;
-}
-
 .paragraph {
 
 }
@@ -155,4 +152,22 @@ a {
 
 .eraseStyle-removed .er {
     visibility: hidden;
+}
+
+.index-item {
+
+}
+
+.index-list {
+    background-color: var(--erasure-bg-color);
+    border: 1px dashed var(--main-text-color);
+    color: var(--erasure-text-color);
+    border: 1px dashed var(--main-text-color);
+    border-radius: 4px;
+    padding: 1.5rem 1.5rem;
+    box-shadow: 5px 10px 5px var(--erasure-text-color);
+}
+
+.index-list-item a {
+color: var(--erasure-text-color);
 }
