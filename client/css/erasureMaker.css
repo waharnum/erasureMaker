@@ -3,15 +3,15 @@
 :root {
   --main-bg-color: #3e6990;
   --main-text-color: #eef4ed;
-  --erasure-bg-color: #eef4ed;
-  --erasure-text-color: #000;
-  --button-bg-color: #8da9c4;
-  --button-bg-color-hover: #13315c;
+  --contrast-bg-color: #eef4ed;
+  --contrast-text-color: #000;
+  --accent-bg-color-light: #8da9c4;
+  --accent-bg-color-dark: #13315c;
 }
 
 body {
     margin: 0 auto;
-    background-color: var(--main-bg-color);
+    background-color: var(--contrast-bg-color);
     color: var(--main-text-color);
     font-family: 'Source Sans Pro', sans-serif;
 }
@@ -22,10 +22,12 @@ a {
 
 .erasureMaker-pageContainer {
     margin: 0 auto;
+
 }
 
 .erasureMaker-pageTitle-container {
-    background-color: black;
+    background-color: var(--accent-bg-color-dark);
+    border-top: 4px solid var(--accent-bg-color-light);
 }
 
 .erasureMaker-pageTitle-innerContainer {
@@ -49,8 +51,13 @@ a {
 }
 
 .erasureMaker-contentContainer {
+    background-color: var(--main-bg-color);
     margin: 0 auto;
     max-width: 40rem;
+    padding: 0.5rem 2rem 1rem 2rem;
+    border-width: 0 2px 1px 2px;
+    border-style: solid;
+    border-color: var(--accent-bg-color-dark);
 }
 
 .controls {
@@ -75,10 +82,10 @@ a {
   border-radius: 4px;
   padding: 0 0.5rem;
   margin: 0 auto;
-  background-color: var(--erasure-bg-color);
-  color: var(--erasure-text-color);
+  background-color: var(--contrast-bg-color);
+  color: var(--contrast-text-color);
   font-size: 1rem;
-  box-shadow: 5px 10px 5px var(--erasure-text-color);
+  box-shadow: 5px 10px 5px var(--contrast-text-color);
   max-width: 40rem;
   min-width: 40rem;
 }
@@ -93,33 +100,33 @@ a {
 
 .function-controls button {
   font-size: 0.8rem;
-  background-color: var(--button-bg-color);
+  background-color: var(--accent-bg-color-light);
   border-radius: 4px;
   border: none;
   padding: 0.25em;
-  box-shadow: 1px 2px 3px var(--erasure-text-color);
+  box-shadow: 1px 2px 3px var(--contrast-text-color);
 }
 
 .function-controls button:hover,  .function-controls button:focus {
-    background-color: var(--button-bg-color-hover);
-    color: var(--erasure-bg-color);
+    background-color: var(--accent-bg-color-dark);
+    color: var(--contrast-bg-color);
 }
 
 .mode-control {
   padding: 4px;
   font-size: 0.8rem;
-  color: var(--erasure-text-color);
-  background-color: var(--button-bg-color);
+  color: var(--contrast-text-color);
+  background-color: var(--accent-bg-color-light);
   border: 1px solid var(--main-text-color);
   border-radius: 4px;
-  box-shadow: 1px 2px 3px var(--erasure-text-color);
+  box-shadow: 1px 2px 3px var(--contrast-text-color);
 }
 
 .mode-control.current-control {
   border: 1px solid var(--main-text-color);
-  color: var(--erasure-bg-color);
+  color: var(--contrast-bg-color);
   border-radius: 4px;
-  background-color: var(--button-bg-color-hover);
+  background-color: var(--accent-bg-color-dark);
 }
 
 .keyboard-shortcut-indicator {
@@ -147,8 +154,8 @@ a {
 .erase-style-selector {
     font-size: 1.25rem;
     border: 1px solid black;
-    background-color: var(--button-bg-color);
-    box-shadow: 1px 2px 3px var(--erasure-text-color);
+    background-color: var(--accent-bg-color-light);
+    box-shadow: 1px 2px 3px var(--contrast-text-color);
 }
 
 .eraseStyle-faded .er {
@@ -160,7 +167,7 @@ a {
 }
 
 .eraseStyle-blacked-out .er {
-    background-color: var(--erasure-text-color);
+    background-color: var(--contrast-text-color);
 }
 
 .eraseStyle-removed .er {
@@ -172,15 +179,15 @@ a {
 }
 
 .index-list {
-    background-color: var(--erasure-bg-color);
+    background-color: var(--contrast-bg-color);
     border: 1px dashed var(--main-text-color);
-    color: var(--erasure-text-color);
+    color: var(--contrast-text-color);
     border: 1px dashed var(--main-text-color);
     border-radius: 4px;
     padding: 1.5rem 1.5rem;
-    box-shadow: 5px 10px 5px var(--erasure-text-color);
+    box-shadow: 5px 10px 5px var(--contrast-text-color);
 }
 
 .index-list-item a {
-color: var(--erasure-text-color);
+color: var(--contrast-text-color);
 }
