@@ -28,6 +28,7 @@ a {
 .erasureMaker-pageTitle-container {
     background-color: var(--accent-bg-color-dark);
     border-top: 4px solid var(--accent-bg-color-light);
+    border-bottom: 1px solid var(--contrast-bg-color);
 }
 
 .erasureMaker-pageTitle-innerContainer {
@@ -41,13 +42,31 @@ a {
     display: inline-block;
 }
 
-.erasureMaker-pageSubtitle {
-  margin-left: 0.5rem;
-  display: inline-block;
-}
-
 .erasureMaker-pageTitle-erasure {
   text-decoration: line-through;
+}
+
+.erasureMaker-menuContainer {
+    background-color: var(--accent-bg-color-dark);
+    max-width: 44rem;
+    border-width: 0 2px 1px 2px;
+    border-style: solid;
+    border-right-color: var(--accent-bg-color-dark);
+    border-left-color: var(--accent-bg-color-dark);
+    border-bottom-color: var(--contrast-bg-color);
+    margin: 0 auto;
+}
+
+.erasureMaker-menuContainer a {
+    text-decoration: none;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 1.25rem;
+    display: inline-block;
+    border-right: 1px solid;
+}
+
+.erasureMaker-menuContainer a.currentPage {
+    text-decoration: line-through;
 }
 
 .erasureMaker-contentContainer {

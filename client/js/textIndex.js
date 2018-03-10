@@ -24,11 +24,19 @@ fluid.defaults("ca.alanharnum.erasureMaker.textIndex", {
 });
 
 ca.alanharnum.erasureMaker.textIndex.generateMarkup = function (availableErasureTexts) {
-    var indexMarkup = "<h2>Available Text Excerpts</h2>";
-    fluid.each(availableErasureTexts.options.texts, function (text, textKey) {
+    var indexMarkup = "<h2>Erasures by Text Excerpt</h2>";
+
+    var textsAsArray = fluid.hashToArray(availableErasureTexts.options.texts, "textKey");
+
+
+    textsAsArray.sort(function (textA, textB) {
+        return textA.title > textB.title;
+    });
+
+    fluid.each(textsAsArray, function (text, idx) {
         var textMarkup =
         `
-            <h3 data-textKey="${textKey}" class="index-item">${text.title}, ${text.author}</h3>
+            <h3 data-textKey="${text.textKey}" class="index-item">${text.title}, ${text.author}</h3>
         `
         indexMarkup = indexMarkup + textMarkup;
     })
@@ -41,13 +49,18 @@ ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {
         var indexItemDOM = $(indexItem);
         var textKey = indexItemDOM.attr("data-textKey");
         var indexURL = `http://${window.location.host}/indexes/${textKey}`;
-        $.get(indexURL, function (data) {
-            var erasureIndex = JSON.parse(data);
-            indexItemDOM.after("<ol class='index-list'></ol>")
-            fluid.each(erasureIndex, function (erasureIndexItem) {
-                var list = indexItemDOM.next("ol");
-                list.append(`<li class="index-list-item"><a href="view.html?erasureId=${erasureIndexItem.erasureKey}">${erasureIndexItem.erasureTitle}</a></li>`);
+        var jqxhr = $.get(indexURL, function () {})
+            .done(function (data) {
+                var erasureIndex = JSON.parse(data);
+                indexItemDOM.after("<ol class='index-list'></ol>")
+                fluid.each(erasureIndex, function (erasureIndexItem) {
+                    var list = indexItemDOM.next("ol");
+                    list.append(`<li class="index-list-item"><a href="view.html?erasureId=${erasureIndexItem.erasureKey}">${erasureIndexItem.erasureTitle}</a></li>`);
+                });
+            })
+            .fail(function (error) {
+                console.log(error);
+                indexItemDOM.remove();
             });
-        });
     })
 };

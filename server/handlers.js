@@ -120,8 +120,8 @@ ca.alanharnum.erasuremaker.server.getIndexHandler.handleRequest = function (requ
     }, function (error) {
         console.log("error trying to get index with id " + id, error);
         var errorAsJSON = JSON.stringify(error);
-        request.events.onError.fire({
-            message: errorAsJSON
+        request.events.onError.fire({            
+            statusCode: error.statusCode
         });
     });
 
