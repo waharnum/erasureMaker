@@ -278,11 +278,20 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
 };
 
 ca.alanharnum.erasureMaker.text.toggleWord = function (characterSelector) {
+  var isErased = $(characterSelector).hasClass("er");
+
   var prev, next;
   prev = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "prev");
   next = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "next");
   var word = $(characterSelector).add(prev).add(next);
-  word.toggleClass("er");
+  // if original character erased, toggle off erasing for whole word
+  if(isErased) {
+      word.removeClass("er");
+  // if original character not erased, toggle  erasing for whole word      
+  } else if (!isErased) {
+      word.addClass("er");
+  }
+
 };
 
 ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors = function (characterSelector, direction) {
@@ -408,7 +417,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
         "mode-control-restore": ".mode-control-restore",
         "function-control-erase-all": ".function-control-erase-all",
         "function-control-restore-all": ".function-control-restore-all",
-        "function-control-save": ".function-control-save"        
+        "function-control-save": ".function-control-save"
     }
 });
 
