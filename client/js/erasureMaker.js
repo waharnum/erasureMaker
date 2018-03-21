@@ -226,7 +226,7 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
         key: key
     };
 
-    var sourceMarkup = `Original text from <em>${title}</em> by ${author} (<a href='${sourceURL}'>source</a>)`;
+    var sourceMarkup = `Original text excerpt from <em>${title}</em> by ${author} (<a href='${sourceURL}'>source</a>)`;
 
     that.locate("source").append(sourceMarkup);
 
@@ -287,7 +287,7 @@ ca.alanharnum.erasureMaker.text.toggleWord = function (characterSelector) {
   // if original character erased, toggle off erasing for whole word
   if(isErased) {
       word.removeClass("er");
-  // if original character not erased, toggle  erasing for whole word      
+  // if original character not erased, toggle  erasing for whole word
   } else if (!isErased) {
       word.addClass("er");
   }
