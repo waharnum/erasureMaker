@@ -5,10 +5,6 @@ fluid.defaults("ca.alanharnum.erasureMakerView", {
         // displayedErasure: null
     },
     modelListeners: {
-        displayedErasure: {
-            func: "ca.alanharnum.erasureMaker.loadErasure",
-            args: ["{erasureText}", "{that}.model.displayedErasure"]
-        }
     },
     events: {
         "onTextsReady": null
@@ -25,6 +21,10 @@ fluid.defaults("ca.alanharnum.erasureMakerView", {
                     availableTexts: "{availableErasureTexts}.model.texts"
                 },
                 modelListeners: {
+                    "{erasureMakerView}.model.displayedErasure": {
+                        func: "ca.alanharnum.erasureMaker.loadErasure",
+                        args: ["{that}", "{erasureMakerView}.model.displayedErasure"]
+                    },
                     eraseStyle: {
                         funcName: "ca.alanharnum.erasureMaker.text.changeEraseStyle",
                         args: ["{that}", "{that}.model.eraseStyle"]

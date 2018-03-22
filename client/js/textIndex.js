@@ -1,24 +1,43 @@
 fluid.defaults("ca.alanharnum.erasureMaker.textIndex", {
-    gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
+    gradeNames: ["fluid.component"],
+    events: {
+        onTextsReady: null
+    },
     components: {
         availableErasureTexts: {
-            type: "ca.alanharnum.erasureMaker.availableErasureTexts"
-        }
-    },
-    strings: {
-        markup: {
-            expander: {
-                funcName: "ca.alanharnum.erasureMaker.textIndex.generateMarkup",
-                args: "{that}.availableErasureTexts"
+            type: "ca.alanharnum.erasureMaker.availableErasureTexts",
+            options: {
+                listeners: {
+                    "onTextsChanged.escalate": {
+                        func: "{textIndex}.events.onTextsReady.fire"
+                    }
+                }
             }
-        }
-    },
-    selectors: {
-        "index-item": ".index-item"
-    },
-    listeners: {
-        "onMarkupAppended.addIndexes": {
-            funcName: "ca.alanharnum.erasureMaker.textIndex.addIndexes"
+        },
+        indexMarkup: {
+            type: "fluid.viewComponent",
+            createOnEvent: "onTextsReady",
+            container: ".ahc-erasureMaker-textIndex",
+            options: {
+                gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent"],
+                strings: {
+                    markup: {
+                        expander: {
+                            funcName: "ca.alanharnum.erasureMaker.textIndex.generateMarkup",
+                            args: "{availableErasureTexts}"
+                        }
+                    }
+                },
+                selectors: {
+                    "index-item": ".index-item"
+                },
+                listeners: {
+                    "onCreate.addIndexes": {
+                        funcName: "ca.alanharnum.erasureMaker.textIndex.addIndexes",
+                        args: ["{that}"]
+                    }
+                }
+            }
         }
     }
 });
@@ -26,7 +45,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.textIndex", {
 ca.alanharnum.erasureMaker.textIndex.generateMarkup = function (availableErasureTexts) {
     var indexMarkup = "<h2>Erasures by Text Excerpt</h2>";
 
-    var textsAsArray = fluid.hashToArray(availableErasureTexts.options.texts, "textKey");
+    var textsAsArray = fluid.hashToArray(availableErasureTexts.model.texts, "textKey");
 
 
     textsAsArray.sort(function (textA, textB) {
@@ -43,7 +62,7 @@ ca.alanharnum.erasureMaker.textIndex.generateMarkup = function (availableErasure
     return indexMarkup;
 };
 
-ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {
+ca.alanharnum.erasureMaker.textIndex.addIndexes = function (that) {    
     var indexItems = that.locate("index-item");
     fluid.each(indexItems, function (indexItem) {
         var indexItemDOM = $(indexItem);
