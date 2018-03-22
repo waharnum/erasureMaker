@@ -19,10 +19,10 @@ fluid.defaults("ca.alanharnum.erasureMakerView", {
             container: ".erasureMaker-text",
             createOnEvent: "onTextsReady",
             options: {
-                availableTexts: "{availableErasureTexts}.options.texts",
                 model: {
                     currentMode: "{erasureMakerView}.model.currentMode",
-                    eraseStyle: "{erasureMakerView}.model.eraseStyle"
+                    eraseStyle: "{erasureMakerView}.model.eraseStyle",
+                    availableTexts: "{availableErasureTexts}.model.texts"
                 },
                 modelListeners: {
                     eraseStyle: {
@@ -47,7 +47,7 @@ fluid.defaults("ca.alanharnum.erasureMakerView", {
             createOnEvent: "onMarkupAppended",
             options: {
                 listeners: {
-                    "onCreate.escalate": {
+                    "onTextsChanged.escalate": {
                         func: "{erasureMakerView}.events.onTextsReady.fire"
                     }
                 }
@@ -138,7 +138,13 @@ ca.alanharnum.erasureMaker.loadErasure = function (erasureTextComponent, erasure
 fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
     gradeNames: ["ca.alanharnum.erasureMaker.markupAppendingComponent", "fluid.viewComponent"],
     model: {
-        eraseStyle: "faded"
+        eraseStyle: "faded",
+        availableTexts: {
+            quickBrownFox: {
+                source: "http://alanharnum.ca",
+                text: "The quick brown fox\n\njumped over\n\nthe lazy dog"
+            }
+        }
     },
     selectors: {
         "text": ".text",
@@ -147,20 +153,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         "character": ".char",
         "fade": ".fd",
         "erasureTitle": ".erasureTitle"
-    },
-    availableTexts: {
-        quickBrownFox: {
-            source: "http://alanharnum.ca",
-            text:
-                `
-                The quick brown fox
-
-                jumped over
-
-                the lazy dog
-
-                `
-        }
     },
     strings: {
         markup:
@@ -210,7 +202,7 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-    var availableTexts = fluid.hashToArray(that.options.availableTexts, "key");
+    var availableTexts = fluid.hashToArray(that.model.availableTexts, "key");
 
     var selectedText = availableTexts[getRandomInt(availableTexts.length)];
 
@@ -218,6 +210,7 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
     var title = selectedText.title;
     var author = selectedText.author;
     var key = selectedText.key;
+
 
     that.sourceText = {
         sourceURL: sourceURL,

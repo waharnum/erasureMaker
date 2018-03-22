@@ -4,10 +4,10 @@
 
 # Docker
 
-docker run -p 8081:8081 erasuremaker
+`docker run -p 8081:8081 erasuremaker`
 
 # Docker With Persistent Storage
 
-docker volume create erasure-maker-storage
+`docker volume create erasure-maker-storage`
 
-docker run -p 8081:8081 -v erasure-maker-storage:/erasuremaker/storage erasuremaker
+`docker run -p 8081:8081 -v erasure-maker-storage:/erasuremaker/storage erasuremaker`
