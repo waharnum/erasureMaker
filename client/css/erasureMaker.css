@@ -197,6 +197,11 @@ a {
 
 }
 
+.index-item-new-erasure {
+    display: block;
+    font-size: 0.8rem;    
+}
+
 .index-list {
     background-color: var(--contrast-bg-color);
     border: 1px dashed var(--main-text-color);
