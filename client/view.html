@@ -32,14 +32,45 @@
         var erasureId = ca.alanharnum.erasureMaker.getParameterByName("erasureId");
 
         $(document).ready(function () {
-            var erasureView = ca.alanharnum.erasureMakerView(".ahc-erasureMaker", {});
-            if(erasureId) {
-                erasureView.applier.change("displayedErasure", erasureId);
-                // erasureView.erasureControls.locate("erase-style-selector").val("blacked-out");
-                // erasureView.erasureControls.locate("erase-style-selector").change();
-            }
+            var erasureView = ca.alanharnum.erasureMakerView(".ahc-erasureMaker", {
+                listeners: {
+                    "onCreate.changeErasure": {
+                        this: "{that}.applier",
+                        method: "change",
+                        args: ["displayedErasure", erasureId]
+                    }
+                },
+                components: {
+                    erasureControls: {
+                        options: {
+                            listeners: {
+                                "onCreate.changeToBlackoutStyle": {
+                                    funcName: "ca.alanharnum.erasureMakerView.changeToBlackoutStyle",
+                                    args: ["{that}", "{erasureMakerView}"]
+                                },
+                            }
+                        }
+                    },
+                    erasureText: {
+                        options: {                            
+                            strings: {
+                                markup:
+                                `
+                                <div class="erasureTitle"></div>
+                                <p class="text eraseStyle-blacked-out"></p>
+                                <p class="source"></p>
+                                `
+                            }
+                        }
+                    }
+                }
+            });
 
-            // erasureView.applier.change("eraseStyle", "blacked-out");
+            ca.alanharnum.erasureMakerView.changeToBlackoutStyle = function (erasureControls, erasureView) {
+                erasureControls.locate("erase-style-selector").val("blacked-out");
+                erasureControls.locate("erase-style-selector").change();
+                erasureView.applier.change("eraseStyle", "blacked-out");
+            };
         });
     </script>
 

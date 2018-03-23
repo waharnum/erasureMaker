@@ -158,7 +158,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         markup:
         `
         <div class="erasureTitle"></div>
-        <p class="text eraseStyle-faded"></p>
+        <p class="text eraseStyle-blacked-out"></p>
         <p class="source"></p>
         `
     },
@@ -170,7 +170,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
 fluid.defaults("ca.alanharnum.erasureMaker.text.edit", {
     gradeNames: ["ca.alanharnum.erasureMaker.text.view"],
     model: {
-        currentMode: "click"        
+        currentMode: "click"
     },
     listeners: {
         "onMarkupAppended.addSourceText": {
