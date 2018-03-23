@@ -2,9 +2,10 @@
 
 <head>
     <script src="node_modules/infusion/dist/infusion-all.js"></script>
-    <script src="js/texts.js"></script>
+    <script src="js/availableTexts.js"></script>
     <script src="js/markupAppendingComponent.js"></script>
     <script src="js/erasureMaker.js"></script>
+    <script src="js/getParameterByName.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="node_modules/infusion/src/framework/core/css/fluid.css">
@@ -28,18 +29,6 @@
     </div>
 
     <script>
-        // classic query string parser via
-        // https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-        ca.alanharnum.erasureMaker.getParameterByName = function (name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        };
-
         var erasureId = ca.alanharnum.erasureMaker.getParameterByName("erasureId");
 
         $(document).ready(function () {

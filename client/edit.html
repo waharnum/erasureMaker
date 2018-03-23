@@ -2,9 +2,10 @@
 
 <head>
     <script src="node_modules/infusion/dist/infusion-all.js"></script>
-    <script src="js/texts.js"></script>
+    <script src="js/availableTexts.js"></script>
     <script src="js/markupAppendingComponent.js"></script>
     <script src="js/erasureMaker.js"></script>
+    <script src="js/getParameterByName.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="node_modules/infusion/src/framework/core/css/fluid.css">
@@ -15,7 +16,7 @@
     <div class="erasureMaker-pageContainer erasureMaker-editPage">
       <div class="erasureMaker-pageTitle-container">
         <div class="erasureMaker-pageTitle-innerContainer">
-            <h1 class="erasureMaker-pageTitle"><span class="erasureMaker-pageTitle-erasure">Erasure</span>Maker</h1>            
+            <h1 class="erasureMaker-pageTitle"><span class="erasureMaker-pageTitle-erasure">Erasure</span>Maker</h1>
         </div>
       </div>
       <div class="erasureMaker-menuContainer">
@@ -28,8 +29,20 @@
     </div>
 
     <script>
+
         $(document).ready(function () {
-            ca.alanharnum.erasureMakerEdit(".ahc-erasureMaker", {});
+            var textId = ca.alanharnum.erasureMaker.getParameterByName("textId");
+            ca.alanharnum.erasureMakerEdit(".ahc-erasureMaker", {
+                components: {
+                    erasureText: {
+                        options: {
+                            model: {
+                                chosenText: textId || null
+                            }
+                        }
+                    }
+                }
+            });
         });
     </script>
 

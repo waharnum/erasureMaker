@@ -170,7 +170,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
 fluid.defaults("ca.alanharnum.erasureMaker.text.edit", {
     gradeNames: ["ca.alanharnum.erasureMaker.text.view"],
     model: {
-        currentMode: "click",
+        currentMode: "click"        
     },
     listeners: {
         "onMarkupAppended.addSourceText": {
@@ -198,13 +198,22 @@ ca.alanharnum.erasureMaker.text.changeEraseStyle = function (erasureTextComponen
 };
 
 ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
+
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-    var availableTexts = fluid.hashToArray(that.model.availableTexts, "key");
+    var chosenText = fluid.get(that.model, "chosenText");
 
-    var selectedText = availableTexts[getRandomInt(availableTexts.length)];
+    var selectedText;
+
+    if(!chosenText) {
+        var availableTexts = fluid.hashToArray(that.model.availableTexts, "key");
+
+        selectedText = availableTexts[getRandomInt(availableTexts.length)];
+    } else if(chosenText) {
+        selectedText = fluid.get(that.model.availableTexts, chosenText);
+    }
 
     var sourceURL = selectedText.sourceURL;
     var title = selectedText.title;
