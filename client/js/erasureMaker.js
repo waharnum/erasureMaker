@@ -158,7 +158,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         markup:
         `
         <div class="erasureTitle"></div>
-        <p class="text eraseStyle-blacked-out"></p>
+        <p class="text eraseStyle-faded"></p>
         <p class="source"></p>
         `
     },
