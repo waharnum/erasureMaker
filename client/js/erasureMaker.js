@@ -107,6 +107,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
             var erasureText = erasureTextComponent.locate("text").html();
 
             var erasureTitle = prompt("Enter your erasure's title", "Untitled");
+            if(!erasureTitle) return; 
             var erasureData = {
                                 title: erasureTitle,
                                 text: erasureText,
@@ -116,8 +117,10 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                                 sourceTextTitle: erasureTextComponent.sourceText.title,
                             };
 
-            $.post(`http://${window.location.host}/erasure/NEW`, erasureData, function ( data ) {
-                console.log("it worked!", data);
+            $.post(`http://${window.location.host}/erasure/NEW`, erasureData, function (data) {
+                var saveInfo = JSON.parse(data);
+                erasureControlsComponent.locate("message-area").append(`Your erasure ${erasureTitle} has been saved and can be <a href="http://localhost:8081/view.html?erasureId=${saveInfo.savedErasureId}">viewed at this link</a>.`);
+                erasureControlsComponent.locate("function-control-save").fadeOut();
             });
         });
 
@@ -389,6 +392,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
                 <button type="button" class="function-control-restore-all">restore all</button>
                 <button type="button" class="function-control-save">save</button>
             </div>
+            <div class="message-area"></div>
             <label for="select-erase-style">
                 <h2 class="control-header">Erasing Style <span class="control-header-explanation">Change appearance of erased text.</span>
                 </h2>
@@ -419,7 +423,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
         "mode-control-restore": ".mode-control-restore",
         "function-control-erase-all": ".function-control-erase-all",
         "function-control-restore-all": ".function-control-restore-all",
-        "function-control-save": ".function-control-save"
+        "function-control-save": ".function-control-save",
+        "message-area": ".message-area"
     }
 });
 
