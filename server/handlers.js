@@ -55,6 +55,34 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
         });
     }
 
+    // title: erasureTitle,
+    // text: erasureText,
+    // sourceKey: erasureTextComponent.sourceText.key,
+    // sourceURL: erasureTextComponent.sourceText.sourceURL,
+    // sourceTextAuthor: erasureTextComponent.sourceText.author,
+    // sourceTextTitle: erasureTextComponent.sourceText.title,
+
+    var expectedFields = {
+        title: "string",
+        text: "string",
+        sourceKey: "string",
+        sourceURL: "string",
+        sourceTextAuthor: "string",
+        sourceTextTitle: "string"
+    };
+
+    fluid.each(request.req.body, function(fieldValue, fieldKey) {
+        var isExpectedField = expectedFields[fieldKey];
+        var isExpectedType = typeof fieldValue === expectedFields[fieldKey];
+        if(!isExpectedField || !isExpectedType) {
+            console.log("error, erasure structure did not validate", {isExpectedField: isExpectedField, isExpectedType: isExpectedType, fieldValue: fieldValue, fieldKey: fieldKey, typeOf: typeof fieldValue});
+            request.events.onError.fire({
+                message: "Server error",
+                statusCode: 500
+            });
+        }
+    });
+
     var promise = dataSource.set({directErasureId: id}, request.req.body);
 
     // TODO: sanitize more inputs?
@@ -120,7 +148,7 @@ ca.alanharnum.erasuremaker.server.getIndexHandler.handleRequest = function (requ
     }, function (error) {
         console.log("error trying to get index with id " + id, error);
         var errorAsJSON = JSON.stringify(error);
-        request.events.onError.fire({            
+        request.events.onError.fire({
             statusCode: error.statusCode
         });
     });

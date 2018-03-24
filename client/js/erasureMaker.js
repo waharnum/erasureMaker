@@ -106,20 +106,26 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
         erasureControlsComponent.locate("function-control-save").click(function () {
             var erasureText = erasureTextComponent.locate("text").html();
 
-            var erasureTitle = prompt("Enter your erasure's title", "Untitled");
-            if(!erasureTitle) return; 
+            var erasureTitle = fluid.get(erasureTextComponent.model, "erasureTitle");
+
+            if(erasureTitle === "") {
+                erasureTitle = "Untitled";
+            }
+
+            var confirmed = confirm(`Do you want to save the erasure "${erasureTitle}"? You can only save once, so cancel if you want to work on it further.`);
+            if(!confirmed) return;
             var erasureData = {
                                 title: erasureTitle,
                                 text: erasureText,
                                 sourceKey: erasureTextComponent.sourceText.key,
                                 sourceURL: erasureTextComponent.sourceText.sourceURL,
                                 sourceTextAuthor: erasureTextComponent.sourceText.author,
-                                sourceTextTitle: erasureTextComponent.sourceText.title,
+                                sourceTextTitle: erasureTextComponent.sourceText.title                                
                             };
 
             $.post(`http://${window.location.host}/erasure/NEW`, erasureData, function (data) {
                 var saveInfo = JSON.parse(data);
-                erasureControlsComponent.locate("message-area").append(`Your erasure ${erasureTitle} has been saved and can be <a href="http://localhost:8081/view.html?erasureId=${saveInfo.savedErasureId}">viewed at this link</a>.`);
+                erasureControlsComponent.locate("message-area").append(`Your erasure ${erasureTitle} has been saved and can be <a href="view.html?erasureId=${saveInfo.savedErasureId}">viewed at this link</a>.`).fadeIn();
                 erasureControlsComponent.locate("function-control-save").fadeOut();
             });
         });
@@ -134,7 +140,7 @@ ca.alanharnum.erasureMaker.loadErasure = function (erasureTextComponent, erasure
         var erasureTitle = erasure.title;
         var sourceMarkup = `Original text from <em>${erasure.sourceTextTitle}</em> by ${erasure.sourceTextAuthor} (<a href='${erasure.sourceURL}'>source</a>)`;
         erasureTextComponent.locate("source").html(sourceMarkup);
-        erasureTextComponent.locate("erasureTitle").html(`<h2>${erasureTitle}</h2>`);
+        erasureTextComponent.locate("erasureTitle").text(erasureTitle);
    });
 };
 
@@ -147,7 +153,8 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
                 source: "http://alanharnum.ca",
                 text: "The quick brown fox\n\njumped over\n\nthe lazy dog"
             }
-        }
+        },
+        erasureTitle: ""
     },
     selectors: {
         "text": ".text",
@@ -155,12 +162,13 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         "paragraph": ".paragraph",
         "character": ".char",
         "fade": ".fd",
-        "erasureTitle": ".erasureTitle"
+        "erasureTitle": ".erasureTitle",
+        "erasureTitleContainer": ".erasureTitleContainer"
     },
     strings: {
         markup:
         `
-        <div class="erasureTitle"></div>
+        <div class="erasureTitleContainer"><h2 class="erasureTitle"></h2></div>
         <p class="text eraseStyle-faded"></p>
         <p class="source"></p>
         `
@@ -270,6 +278,9 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
           if(that.model.currentMode === "word") {
             ca.alanharnum.erasureMaker.text.toggleWord(this)
           }
+          if(that.model.currentMode === "titleSelect") {
+            ca.alanharnum.erasureMaker.text.addToSaveTitle(this, that);
+          }
         });
         $(this).mouseenter(function () {
           if(that.model.currentMode === "erase") {
@@ -285,10 +296,7 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
 ca.alanharnum.erasureMaker.text.toggleWord = function (characterSelector) {
   var isErased = $(characterSelector).hasClass("er");
 
-  var prev, next;
-  prev = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "prev");
-  next = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "next");
-  var word = $(characterSelector).add(prev).add(next);
+  var word = ca.alanharnum.erasureMaker.text.getWordFromCharacter(characterSelector);
   // if original character erased, toggle off erasing for whole word
   if(isErased) {
       word.removeClass("er");
@@ -296,7 +304,21 @@ ca.alanharnum.erasureMaker.text.toggleWord = function (characterSelector) {
   } else if (!isErased) {
       word.addClass("er");
   }
+};
 
+ca.alanharnum.erasureMaker.text.addToSaveTitle = function (characterSelector, erasureText) {
+    var currentTitle = fluid.get(erasureText.model, "erasureTitle");
+    var updatedTitle = currentTitle + " " + ca.alanharnum.erasureMaker.text.getWordFromCharacter(characterSelector).text().toLowerCase();
+    var trimmedTitle = updatedTitle.substr(0,50).trim();
+    erasureText.applier.change("erasureTitle", trimmedTitle);
+    erasureText.locate("erasureTitle").text(fluid.get(erasureText.model, "erasureTitle"));
+};
+
+ca.alanharnum.erasureMaker.text.getWordFromCharacter = function (characterSelector) {
+    var prev, next;
+    prev = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "prev");
+    next = ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors(characterSelector, "next");
+    return $(characterSelector).add(prev).add(next);
 };
 
 ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors = function (characterSelector, direction) {
@@ -385,6 +407,10 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
                         <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="restore" />
                         drag cursor to <span class="keyboard-shortcut-indicator">r</span>estore characters
                     </label>
+                    <label class="mode-control mode-control-titleSelect">
+                        <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="titleSelect" />
+                        select words for <span class="keyboard-shortcut-indicator">t</span>itle
+                    </label>
             </div>
             <h2 class="control-header">Functions <span class="control-header-explanation">Operate on the entire text at once.</span></h2>
             <div class="function-controls controls">
@@ -417,10 +443,12 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
         }
     },
     selectors: {
+        "mode-control": ".mode-control",
         "mode-control-click": ".mode-control-click",
         "mode-control-word": ".mode-control-word",
         "mode-control-erase": ".mode-control-erase",
         "mode-control-restore": ".mode-control-restore",
+        "mode-control-titleSelect": ".mode-control-titleSelect",
         "function-control-erase-all": ".function-control-erase-all",
         "function-control-restore-all": ".function-control-restore-all",
         "function-control-save": ".function-control-save",
@@ -442,6 +470,9 @@ ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
         if(e.key === "r") {
             that.locate("mode-control-restore").click();
         }
+        if(e.key === "t") {
+            that.locate("mode-control-titleSelect").click();
+        }
     });
 };
 
@@ -449,34 +480,33 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
     that.locate("mode-control-click").click(function () {
         that.applier.change("currentMode", "click");
         $(this).addClass("current-control");
-          that.locate("mode-control-word").removeClass("current-control");
-          that.locate("mode-control-erase").removeClass("current-control");
-          that.locate("mode-control-restore").removeClass("current-control");
+          that.locate("mode-control").not($(this)).removeClass("current-control");
     });
 
     that.locate("mode-control-word").click(function () {
         that.applier.change("currentMode", "word");
         $(this).addClass("current-control");
-        that.locate("mode-control-click").removeClass("current-control");
-          that.locate("mode-control-erase").removeClass("current-control");
-          that.locate("mode-control-restore").removeClass("current-control");
+        that.locate("mode-control").not($(this)).removeClass("current-control");
     });
 
     that.locate("mode-control-erase").click(function () {
         that.applier.change("currentMode", "erase");
         $(this).addClass("current-control");
-        that.locate("mode-control-word").removeClass("current-control");
-        that.locate("mode-control-click").removeClass("current-control");
-        that.locate("mode-control-restore").removeClass("current-control");
+        that.locate("mode-control").not($(this)).removeClass("current-control");
     });
 
     that.locate("mode-control-restore").click(function () {
-        that.applier.change("currentMode", "restore");
+        that.applier.change("currentM ode", "restore");
         $(this).addClass("current-control");
-        that.locate("mode-control-word").removeClass("current-control");
-        that.locate("mode-control-click").removeClass("current-control");
-        that.locate("mode-control-erase").removeClass("current-control");
+        that.locate("mode-control").not($(this)).removeClass("current-control");
     });
+
+    that.locate("mode-control-titleSelect").click(function () {
+        that.applier.change("currentMode", "titleSelect");
+        $(this).addClass("current-control");
+        that.locate("mode-control").not($(this)).removeClass("current-control");
+    });
+
 };
 
 ca.alanharnum.erasureMaker.controls.addEraseStyleControl = function (that) {

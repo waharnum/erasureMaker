@@ -85,7 +85,7 @@ a {
 
 .mode-controls {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 0.5rem;
 }
 
@@ -199,10 +199,10 @@ a {
 
 .index-item-new-erasure {
     display: block;
-    font-size: 0.8rem;    
+    font-size: 0.8rem;
 }
 
-.index-list {
+.index-list, .message-area {
     background-color: var(--contrast-bg-color);
     border: 1px dashed var(--main-text-color);
     color: var(--contrast-text-color);
@@ -212,6 +212,10 @@ a {
     box-shadow: 5px 10px 5px var(--contrast-text-color);
 }
 
-.index-list-item a {
-color: var(--contrast-text-color);
+.message-area {
+    display: none;
+}
+
+.index-list-item a, .message-area a {
+    color: var(--contrast-text-color);
 }
