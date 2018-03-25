@@ -498,7 +498,7 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
     });
 
     that.locate("mode-control-restore").click(function () {
-        that.applier.change("currentM ode", "restore");
+        that.applier.change("currentMode", "restore");
         $(this).addClass("current-control");
         that.locate("mode-control").not($(this)).removeClass("current-control");
     });
