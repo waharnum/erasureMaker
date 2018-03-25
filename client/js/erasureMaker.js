@@ -120,7 +120,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                                 sourceKey: erasureTextComponent.sourceText.key,
                                 sourceURL: erasureTextComponent.sourceText.sourceURL,
                                 sourceTextAuthor: erasureTextComponent.sourceText.author,
-                                sourceTextTitle: erasureTextComponent.sourceText.title                                
+                                sourceTextTitle: erasureTextComponent.sourceText.title
                             };
 
             $.post(`http://${window.location.host}/erasure/NEW`, erasureData, function (data) {
@@ -140,7 +140,7 @@ ca.alanharnum.erasureMaker.loadErasure = function (erasureTextComponent, erasure
         var erasureTitle = erasure.title;
         var sourceMarkup = `Original text from <em>${erasure.sourceTextTitle}</em> by ${erasure.sourceTextAuthor} (<a href='${erasure.sourceURL}'>source</a>)`;
         erasureTextComponent.locate("source").html(sourceMarkup);
-        erasureTextComponent.locate("erasureTitle").text(erasureTitle);
+        erasureTextComponent.locate("erasureTitle").html(`<a href="/view.html?erasureId=${erasure.id}">${erasureTitle}</a>`);
    });
 };
 
@@ -154,7 +154,9 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
                 text: "The quick brown fox\n\njumped over\n\nthe lazy dog"
             }
         },
-        erasureTitle: ""
+        erasureTitle: "",
+        // Will receive an ID if retrieved from storage
+        id: null
     },
     selectors: {
         "text": ".text",
@@ -337,7 +339,7 @@ ca.alanharnum.erasureMaker.text.getAdjacentcharacterSelectors = function (charac
     }
   }
   return adjacentcharacterSelectors;
-}
+};
 
 ca.alanharnum.erasureMaker.text.isPunctuationCharacter = function (character) {
   // python.punctuation definition, via https://stackoverflow.com/questions/4328500/how-can-i-strip-all-punctuation-from-a-string-in-javascript-using-regex#comment39981263_4328722

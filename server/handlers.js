@@ -4,6 +4,7 @@ var fluid = require("infusion");
 require("kettle");
 var uuidv1 = require("uuid/v1");
 var isuuid = require("is-uuid");
+var fs = require("fs");
 
 var ca = fluid.registerNamespace("ca");
 
@@ -55,13 +56,6 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
         });
     }
 
-    // title: erasureTitle,
-    // text: erasureText,
-    // sourceKey: erasureTextComponent.sourceText.key,
-    // sourceURL: erasureTextComponent.sourceText.sourceURL,
-    // sourceTextAuthor: erasureTextComponent.sourceText.author,
-    // sourceTextTitle: erasureTextComponent.sourceText.title,
-
     var expectedFields = {
         title: "string",
         text: "string",
@@ -110,12 +104,39 @@ fluid.defaults("ca.alanharnum.erasuremaker.server.getErasureHandler", {
     }
 });
 
+ca.alanharnum.erasuremaker.server.getRandomErasureID = function () {
+    var storagePath = "./storage/erasures/";
+    var erasureFilenames = [];
+    var erasureFiles = fs.readdirSync(storagePath);
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    erasureFiles.forEach(function (filename) {
+        if(filename !== ".gitignore") {
+            erasureFilenames.push(filename);
+        }
+    });
+
+    var random = getRandomInt(erasureFilenames.length);
+    console.log(erasureFilenames, erasureFilenames.length, random);
+
+    return erasureFilenames[random];
+
+};
+
 ca.alanharnum.erasuremaker.server.getErasureHandler.handleRequest = function (request, dataSource) {
   var id = request.req.params.id;
+
+  if(id === "RAND") {
+      id = ca.alanharnum.erasuremaker.server.getRandomErasureID();
+  }
 
   var promise = dataSource.get({directErasureId: id});
 
   promise.then(function (response) {
+      response.id = id;
       var responseAsJSON = JSON.stringify(response);
       request.events.onSuccess.fire(responseAsJSON);
   }, function (error) {
