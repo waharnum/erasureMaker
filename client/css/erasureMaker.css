@@ -22,7 +22,6 @@ a {
 
 .erasureMaker-pageContainer {
     margin: 0 auto;
-
 }
 
 .erasureMaker-pageTitle-container {
@@ -37,7 +36,6 @@ a {
 }
 
 .erasureMaker-pageTitle {
-
     font-size: 2.5rem;
     display: inline-block;
 }
@@ -222,4 +220,17 @@ a {
 
 .index-list-item a, .message-area a {
     color: var(--contrast-text-color);
+}
+
+.erasureMaker-footerContainer {
+    margin: 0 auto;
+    background-color: var(--accent-bg-color-dark);
+    border-top: 4px solid var(--accent-bg-color-light);
+    border-bottom: 1px solid var(--contrast-bg-color);
+
+}
+
+.erasureMaker-footerContainer-inner {
+    margin: 0 auto;
+    max-width: 52em;
 }

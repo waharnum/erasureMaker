@@ -112,7 +112,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
                 erasureTitle = "Untitled";
             }
 
-            var confirmed = confirm(`Do you want to save the erasure "${erasureTitle}"? You can only save once, so cancel if you want to work on it further.`);
+            var confirmed = confirm(`Do you want to save the erasure "${erasureTitle}"? You can only save once, so cancel if you want to work on it further.\n\nPlease also note that all erasures saved to this site are submitted anonymously and you agree to license your work under a Creative Commons 0 license by saving them here.`);
             if(!confirmed) return;
             var erasureData = {
                                 title: erasureTitle,
