@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <script src="node_modules/infusion/dist/infusion-all.js"></script>
+    <script src="js/availableTexts.js"></script>
+    <script src="js/markupAppendingComponent.js"></script>
+    <script src="js/textIndex.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="css/erasureMaker.css" />
+</head>
+
+<body>
+  <div class="erasureMaker-pageContainer erasureMaker-indexPage">
+    <div class="erasureMaker-pageTitle-container">
+        <div class="erasureMaker-pageTitle-innerContainer">
+            <h1 class="erasureMaker-pageTitle"><a href="/"><span class="erasureMaker-pageTitle-erasure">Erasure</span>Maker</a></h1>
+        </div>
+    </div>
+    <div class="erasureMaker-menuContainer">
+      <a href="view.html?erasureId=RAND">View</a> <a href="edit.html">Create New</a> <a href="erasure-index.html" class="currentPage">Index</a>
+    </div>
+    <div class="erasureMaker-contentContainer">
+        <div class="ahc-erasureMaker-textIndex"></div>
+    </div>
+  </div>
+
+    <script>
+        $(document).ready(function () {
+            ca.alanharnum.erasureMaker.textIndex();
+        });
+    </script>
+
+</body>
+
+</html>

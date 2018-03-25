@@ -42,6 +42,10 @@ a {
     display: inline-block;
 }
 
+.erasureMaker-pageTitle a {
+    text-decoration: none;
+}
+
 .erasureMaker-pageTitle-erasure {
   text-decoration: line-through;
 }
