@@ -125,7 +125,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 
             $.post(`http://${window.location.host}/erasure/NEW`, erasureData, function (data) {
                 var saveInfo = JSON.parse(data);
-                erasureControlsComponent.locate("message-area").append(`Your erasure ${erasureTitle} has been saved and can be <a href="view.html?erasureId=${saveInfo.savedErasureId}">viewed at this link</a>.`).fadeIn();
+                erasureControlsComponent.locate("message-area").append(`Your erasure "${erasureTitle}" has been saved and can be <a href="view.html?erasureId=${saveInfo.savedErasureId}">viewed at this link</a>.`).fadeIn();
                 erasureControlsComponent.locate("function-control-save").fadeOut();
             });
         });
