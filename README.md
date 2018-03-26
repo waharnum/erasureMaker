@@ -10,14 +10,14 @@ If you're interested in running your own version, you may be most interested in 
 
 ## Building the Container
 
-`docker build -t erasuremaker .`
+`docker build -t aharnum/erasuremaker .`
 
 ## Docker (Volatile Storage)
 
-`docker run -p 8081:8081 erasuremaker`
+`docker run -p 8081:8081 aharnum/erasuremaker`
 
 ## Docker With a Persistent Storage Volume
 
 `docker volume create erasure-maker-storage`
 
-`docker run -p 8081:8081 -v erasure-maker-storage:/erasuremaker/storage erasuremaker`
+`docker run -d -p 8081:8081 --name erasuremaker-running -v erasure-maker-storage:/erasuremaker/storage aharnum/erasuremaker`
