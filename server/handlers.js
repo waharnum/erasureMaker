@@ -120,7 +120,6 @@ ca.alanharnum.erasuremaker.server.getRandomErasureID = function () {
     });
 
     var random = getRandomInt(erasureFilenames.length);
-    console.log(erasureFilenames, erasureFilenames.length, random);
 
     return erasureFilenames[random];
 
