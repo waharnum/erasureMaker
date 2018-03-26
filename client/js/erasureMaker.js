@@ -114,6 +114,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 
             var confirmed = confirm(`Do you want to save the erasure "${erasureTitle}"? You can only save once, so cancel if you want to work on it further.\n\nPlease also note that all erasures saved to this site are submitted anonymously and you agree to license your work under a Creative Commons 0 license by saving them here.`);
             if(!confirmed) return;
+            console.log(erasureTextComponent.sourceText);
             var erasureData = {
                                 title: erasureTitle,
                                 text: erasureText,
@@ -231,7 +232,7 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
     var sourceURL = selectedText.sourceURL;
     var title = selectedText.title;
     var author = selectedText.author;
-    var key = selectedText.key;
+    var key = selectedText.key || chosenText;
 
 
     that.sourceText = {
