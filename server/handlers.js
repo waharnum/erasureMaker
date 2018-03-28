@@ -2,9 +2,19 @@
 
 var fluid = require("infusion");
 require("kettle");
+require("./mailSender");
 var uuidv1 = require("uuid/v1");
 var isuuid = require("is-uuid");
 var fs = require("fs");
+
+var ca = fluid.registerNamespace("ca");
+
+var mailSender = ca.alanharnum.erasureMaker.mailSender.mailGun({
+    sendCredentials: {
+        "apiKey": "@expand:kettle.resolvers.env(MAILGUN_API_KEY)",
+        "domain": "@expand:kettle.resolvers.env(MAILGUN_DOMAIN)"
+    }
+});
 
 var ca = fluid.registerNamespace("ca");
 
@@ -84,6 +94,16 @@ ca.alanharnum.erasuremaker.server.saveErasureHandler.handleRequest = function (r
 
     promise.then(function (response) {
         var responseAsJSON = JSON.stringify({message: "Save successful", savedErasureId: id});
+
+        if(mailSender.options.sendCredentials.apiKey && mailSender.options.sendCredentials.domain) {
+            mailSender.send({
+                  from: 'ErasureMaker via Alan Harnum <waharnum@gmail.com>',
+                  to: 'waharnum@gmail.com',
+                  subject: '[ErasureMaker] A new erasure has been created',
+                  text: `A new erasure has been created with ID ${id} and title ${request.req.body.title}; view at http://erasure.alanharnum.ca/view.html?erasureId=${id}`
+            });
+        }
+
         request.events.onSuccess.fire(responseAsJSON);
     }, function (error) {
         console.log("error trying to save erasure with id " + id, error);

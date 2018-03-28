@@ -20,4 +20,6 @@ If you're interested in running your own version, you may be most interested in 
 
 `docker volume create erasure-maker-storage`
 
-`docker run -d -p 8081:8081 --name erasuremaker-running -v erasure-maker-storage:/erasuremaker/storage aharnum/erasuremaker`
+`docker run -d -p 8081:8081 --env-file ./erasureMaker_env.ini --name erasuremaker-running -v erasure-maker-storage:/erasuremaker/storage aharnum/erasuremaker`
+
+(Mailgun settings will need to be configured in `erasureMaker_env.ini`)
