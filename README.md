@@ -4,7 +4,7 @@ A web application for making [erasures](https://en.wikipedia.org/wiki/Erasure_(a
 
 At the moment uses very basic filesystem-based storage and indexing for erasures made with it.
 
-If you're interested in running your own version, you may be most interested in modifying the available texts, which are currently in one file in `client/json/texts.json`.
+If you're interested in running your own version, you may be most interested in modifying the available texts, which are currently in one file in `client/json/texts-gutenberg.json`.
 
 # Running Using Docker
 

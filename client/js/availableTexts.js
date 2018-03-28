@@ -14,7 +14,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.availableErasureTexts", {
             type: "fluid.resourceLoader",
             options: {
                 resources: {
-                    texts: "../json/texts.json"
+                    texts: "../json/texts-gutenberg.json"
                 },
                 listeners: {
                     "onResourcesLoaded.addToModel": {
