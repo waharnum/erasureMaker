@@ -33,11 +33,12 @@ a {
 .erasureMaker-pageTitle-innerContainer {
     max-width: 52rem;
     margin: 0 auto;
+    text-align: center;
 }
 
 .erasureMaker-pageTitle {
     font-size: 2.5rem;
-    display: inline-block;
+    letter-spacing: 0.2em;
 }
 
 .erasureMaker-pageTitle a {
@@ -225,12 +226,12 @@ a {
 .erasureMaker-footerContainer {
     margin: 0 auto;
     background-color: var(--accent-bg-color-dark);
-    border-top: 4px solid var(--accent-bg-color-light);
-    border-bottom: 1px solid var(--contrast-bg-color);
-
+    border-top: 1px solid var(--contrast-bg-color);
+    line-height: 2em;
 }
 
 .erasureMaker-footerContainer-inner {
     margin: 0 auto;
     max-width: 52em;
+    text-align: center;
 }
