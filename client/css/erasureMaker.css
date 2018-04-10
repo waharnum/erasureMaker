@@ -11,7 +11,7 @@
 
 body {
     margin: 0 auto;
-    background-color: var(--contrast-bg-color);
+    background-color: var(--main-bg-color);
     color: var(--main-text-color);
     font-family: 'Source Sans Pro', sans-serif;
 }
@@ -25,9 +25,10 @@ a {
 }
 
 .erasureMaker-pageTitle-container {
-    background-color: var(--accent-bg-color-dark);
-    border-top: 4px solid var(--accent-bg-color-light);
-    border-bottom: 1px solid var(--contrast-bg-color);
+    background-color: var(--contrast-bg-color);
+    color: var(--contrast-text-color);
+    border-top: 2px solid var(--accent-bg-color-light);
+    border-bottom: 2px solid var(--accent-bg-color-light);
 }
 
 .erasureMaker-pageTitle-innerContainer {
@@ -43,6 +44,7 @@ a {
 
 .erasureMaker-pageTitle a {
     text-decoration: none;
+    color: var(--contrast-text-color);
 }
 
 .erasureMaker-pageTitle-erasure {
@@ -50,22 +52,39 @@ a {
 }
 
 .erasureMaker-menuContainer {
+    padding: 0.5rem;
     background-color: var(--accent-bg-color-dark);
-    max-width: 44rem;
-    border-width: 0 2px 1px 2px;
-    border-style: solid;
-    border-right-color: var(--accent-bg-color-dark);
-    border-left-color: var(--accent-bg-color-dark);
-    border-bottom-color: var(--contrast-bg-color);
-    margin: 0 auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5rem;
 }
 
-.erasureMaker-menuContainer a {
+.erasureMaker-menuItem {
+    padding: 0.5rem 0 0.5rem 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4px;
+}
+
+.erasureMaker-menuItem:last-child {
+    border-right-width: 1px;
+}
+
+.erasureMaker-menuItem:hover {
+    background-color: var(--accent-bg-color-light);
+    box-shadow: 1px 2px 3px white;
+}
+
+
+.erasureMaker-menuItem:hover a {
+    color: var(--contrast-text-color);
+}
+
+.erasureMaker-menuItem a {
     text-decoration: none;
-    padding: 0.5rem 1rem 0.5rem 1rem;
     font-size: 1.25rem;
-    display: inline-block;
-    border-right: 1px solid;
 }
 
 .erasureMaker-menuContainer a.currentPage {
@@ -77,7 +96,7 @@ a {
     margin: 0 auto;
     max-width: 40rem;
     padding: 0.5rem 2rem 1rem 2rem;
-    border-width: 0 2px 1px 2px;
+    border-width: 0 0 1px 0;
     border-style: solid;
     border-color: var(--accent-bg-color-dark);
 }
