@@ -28,13 +28,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.mailSender.mailGun", {
     }
 });
 
-// var mailData = {
-//   from: 'Alan Harnum <waharnum@gmail.com>',
-//   to: 'waharnum@gmail.com',
-//   subject: 'Hello from ErasureMaker',
-//   text: 'I hope my Mailgun password isn\'t hacked.'
-// };
-
 ca.alanharnum.erasureMaker.mailSender.mailGun.send = function (sendCredentials, mailData) {
     var api_key = sendCredentials.apiKey;
     var domain = sendCredentials.domain;
