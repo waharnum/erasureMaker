@@ -54,7 +54,7 @@
                         options: {
                             listeners: {
                                 "onCreate.changeToBlackoutStyle": {
-                                    funcName: "ca.alanharnum.erasureMakerView.changeToBlackoutStyle",
+                                    funcName: "ca.alanharnum.erasureMakerView.changeToRemovedStyle",
                                     args: ["{that}", "{erasureMakerView}"]
                                 },
                             }
@@ -66,7 +66,7 @@
                                 markup:
                                 `
                                 <div class="erasureTitleContainer"><h2 class="erasureTitle">Title</h2></div>
-                                <p class="text eraseStyle-blacked-out"></p>
+                                <p class="text eraseStyle-removed"></p>
                                 <p class="source"></p>
                                 `
                             }
@@ -75,10 +75,10 @@
                 }
             });
 
-            ca.alanharnum.erasureMakerView.changeToBlackoutStyle = function (erasureControls, erasureView) {
-                erasureControls.locate("erase-style-selector").val("blacked-out");
+            ca.alanharnum.erasureMakerView.changeToRemovedStyle = function (erasureControls, erasureView) {
+                erasureControls.locate("erase-style-selector").val("removed");
                 erasureControls.locate("erase-style-selector").change();
-                erasureView.applier.change("eraseStyle", "blacked-out");
+                erasureView.applier.change("eraseStyle", "removed");
             };
         });
     </script>

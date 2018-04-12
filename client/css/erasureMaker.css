@@ -85,6 +85,7 @@ a {
 .erasureMaker-menuItem a {
     text-decoration: none;
     font-size: 1.25rem;
+    display: block;
 }
 
 .erasureMaker-menuContainer a.currentPage {
