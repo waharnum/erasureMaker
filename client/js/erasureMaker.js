@@ -155,7 +155,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
                 text: "The quick brown fox\n\njumped over\n\nthe lazy dog"
             }
         },
-        erasureTitle: "",
+        erasureTitle: "Untitled",
         // Will receive an ID if retrieved from storage
         id: null
     },
@@ -246,6 +246,9 @@ ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
 
     that.locate("source").append(sourceMarkup);
 
+    // TODO: this doesn't really belong here
+    that.locate("erasureTitle").html(`${fluid.get(that.model, "erasureTitle")}`);
+
     var text = selectedText.text;
 
     var splitText = text.split("\n\n");
@@ -303,6 +306,9 @@ ca.alanharnum.erasureMaker.text.toggleWord = function (characterSelector) {
 
 ca.alanharnum.erasureMaker.text.addToSaveTitle = function (characterSelector, erasureText) {
     var currentTitle = fluid.get(erasureText.model, "erasureTitle");
+    if(currentTitle === "Untitled") {
+        currentTitle = "";
+    }
     var updatedTitle = currentTitle + " " + ca.alanharnum.erasureMaker.text.getWordFromCharacter(characterSelector).text().toLowerCase();
     var trimmedTitle = updatedTitle.substr(0,50).trim();
     erasureText.applier.change("erasureTitle", trimmedTitle);
