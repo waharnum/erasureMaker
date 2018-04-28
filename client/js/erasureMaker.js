@@ -285,14 +285,6 @@ ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
             ca.alanharnum.erasureMaker.text.addToSaveTitle(this, that);
           }
         });
-        $(this).mouseenter(function () {
-          if(that.model.currentMode === "erase") {
-            $(this).addClass("er");
-          }
-          if(that.model.currentMode === "restore") {
-            $(this).removeClass("er");
-          }
-        });
     });
 };
 
@@ -402,14 +394,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
                         <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
                         click to toggle <span class="keyboard-shortcut-indicator">w</span>words
                     </label>
-                    <label class="mode-control mode-control-erase">
-                        <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="erase" />
-                        drag cursor to <span class="keyboard-shortcut-indicator">e</span>rase characters
-                    </label>
-                    <label class="mode-control mode-control-restore">
-                        <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="restore" />
-                        drag cursor to <span class="keyboard-shortcut-indicator">r</span>estore characters
-                    </label>
                     <label class="mode-control mode-control-titleSelect">
                         <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="titleSelect" />
                         select words for <span class="keyboard-shortcut-indicator">t</span>itle
@@ -449,8 +433,6 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
         "mode-control": ".mode-control",
         "mode-control-click": ".mode-control-click",
         "mode-control-word": ".mode-control-word",
-        "mode-control-erase": ".mode-control-erase",
-        "mode-control-restore": ".mode-control-restore",
         "mode-control-titleSelect": ".mode-control-titleSelect",
         "function-control-erase-all": ".function-control-erase-all",
         "function-control-restore-all": ".function-control-restore-all",
@@ -467,12 +449,6 @@ ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
         if(e.key === "w") {
             that.locate("mode-control-word").click();
         }
-        if(e.key === "e") {
-            that.locate("mode-control-erase").click();
-        }
-        if(e.key === "r") {
-            that.locate("mode-control-restore").click();
-        }
         if(e.key === "t") {
             that.locate("mode-control-titleSelect").click();
         }
@@ -488,18 +464,6 @@ ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
 
     that.locate("mode-control-word").click(function () {
         that.applier.change("currentMode", "word");
-        $(this).addClass("current-control");
-        that.locate("mode-control").not($(this)).removeClass("current-control");
-    });
-
-    that.locate("mode-control-erase").click(function () {
-        that.applier.change("currentMode", "erase");
-        $(this).addClass("current-control");
-        that.locate("mode-control").not($(this)).removeClass("current-control");
-    });
-
-    that.locate("mode-control-restore").click(function () {
-        that.applier.change("currentMode", "restore");
         $(this).addClass("current-control");
         that.locate("mode-control").not($(this)).removeClass("current-control");
     });
