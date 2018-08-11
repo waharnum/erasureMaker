@@ -1,0 +1,257 @@
+/* https://coolors.co/b7ad99-ff4365-030301-00d9c0-fffff3 */
+
+:root {
+  --main-bg-color: #3e6990;
+  --main-text-color: #eef4ed;
+  --contrast-bg-color: #eef4ed;
+  --contrast-text-color: #000;
+  --accent-bg-color-light: #8da9c4;
+  --accent-bg-color-dark: #13315c;
+}
+
+body {
+    margin: 0 auto;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+a {
+  color: var(--main-text-color);
+}
+
+.erasureMaker-pageContainer {
+    margin: 0 auto;
+}
+
+.erasureMaker-pageTitle-container {
+    background-color: var(--contrast-bg-color);
+    color: var(--contrast-text-color);
+    border-top: 2px solid var(--accent-bg-color-light);
+    border-bottom: 2px solid var(--accent-bg-color-light);
+}
+
+.erasureMaker-pageTitle-innerContainer {
+    max-width: 52rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.erasureMaker-pageTitle {
+    font-size: 2.5rem;
+    letter-spacing: 0.2em;
+}
+
+.erasureMaker-pageTitle a {
+    text-decoration: none;
+    color: var(--contrast-text-color);
+}
+
+.erasureMaker-pageTitle-erasure {
+  text-decoration: line-through;
+}
+
+.erasureMaker-menuContainer {
+    padding: 0.5rem;
+    background-color: var(--accent-bg-color-dark);
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5rem;
+}
+
+.erasureMaker-menuItem {
+    padding: 0.5rem 0 0.5rem 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4px;
+}
+
+.erasureMaker-menuItem:last-child {
+    border-right-width: 1px;
+}
+
+.erasureMaker-menuItem:hover {
+    background-color: var(--accent-bg-color-light);
+    box-shadow: 1px 2px 3px white;
+}
+
+
+.erasureMaker-menuItem:hover a {
+    color: var(--contrast-text-color);
+}
+
+.erasureMaker-menuItem a {
+    text-decoration: none;
+    font-size: 1.25rem;
+    display: block;
+}
+
+.erasureMaker-menuContainer a.currentPage {
+    text-decoration: line-through;
+}
+
+.erasureMaker-contentContainer {
+    background-color: var(--main-bg-color);
+    margin: 0 auto;
+    max-width: 40rem;
+    padding: 0.5rem 2rem 1rem 2rem;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: var(--accent-bg-color-dark);
+}
+
+.controls {
+  margin: 0.5em 0 0.5em 0;
+}
+
+.mode-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.5rem;
+}
+
+.function-controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.5rem;
+}
+
+.text {
+  font-family: 'Source Code Pro', sans-serif;
+  border: 1px dashed var(--main-text-color);
+  border-radius: 4px;
+  padding: 0 0.5rem;
+  margin: 0 auto;
+  background-color: var(--contrast-bg-color);
+  color: var(--contrast-text-color);
+  font-size: 1rem;
+  box-shadow: 5px 10px 5px var(--contrast-text-color);
+  max-width: 40rem;
+  min-width: 40rem;
+}
+
+.control-header {
+    font-size: 1.25rem;
+}
+
+.control-header-explanation {
+    font-size: 0.75rem;
+}
+
+.function-controls button {
+  font-size: 0.8rem;
+  background-color: var(--accent-bg-color-light);
+  border-radius: 4px;
+  border: none;
+  padding: 0.25em;
+  box-shadow: 1px 2px 3px var(--contrast-text-color);
+}
+
+.function-controls button:hover,  .function-controls button:focus {
+    background-color: var(--accent-bg-color-dark);
+    color: var(--contrast-bg-color);
+}
+
+.mode-control {
+  padding: 4px;
+  font-size: 0.8rem;
+  color: var(--contrast-text-color);
+  background-color: var(--accent-bg-color-light);
+  border: 1px solid var(--main-text-color);
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px var(--contrast-text-color);
+}
+
+.mode-control.current-control {
+  border: 1px solid var(--main-text-color);
+  color: var(--contrast-bg-color);
+  border-radius: 4px;
+  background-color: var(--accent-bg-color-dark);
+}
+
+.keyboard-shortcut-indicator {
+  font-weight: bold;
+  font-size: 200%;
+  text-transform: uppercase;
+}
+
+.keyboard-shortcut-indicator::before {
+    content: "["
+}
+
+.keyboard-shortcut-indicator::after {
+    content: "]"
+}
+
+.paragraph {
+
+}
+
+.erasureMaker-editPage .char {
+  cursor: pointer;
+}
+
+.erase-style-selector {
+    font-size: 1.25rem;
+    border: 1px solid black;
+    background-color: var(--accent-bg-color-light);
+    box-shadow: 1px 2px 3px var(--contrast-text-color);
+}
+
+.eraseStyle-faded .er {
+  opacity: 0.5;
+}
+
+.eraseStyle-strike-through .er {
+  text-decoration-line: line-through;
+}
+
+.eraseStyle-blacked-out .er {
+    background-color: var(--contrast-text-color);
+}
+
+.eraseStyle-removed .er {
+    visibility: hidden;
+}
+
+.index-item {
+
+}
+
+.index-item-new-erasure {
+    display: block;
+    font-size: 0.8rem;
+}
+
+.index-list, .message-area {
+    background-color: var(--contrast-bg-color);
+    border: 1px dashed var(--main-text-color);
+    color: var(--contrast-text-color);
+    border: 1px dashed var(--main-text-color);
+    border-radius: 4px;
+    padding: 1.5rem 1.5rem;
+    box-shadow: 5px 10px 5px var(--contrast-text-color);
+}
+
+.message-area {
+    display: none;
+}
+
+.index-list-item a, .message-area a {
+    color: var(--contrast-text-color);
+}
+
+.erasureMaker-footerContainer {
+    margin: 0 auto;
+    background-color: var(--accent-bg-color-dark);
+    border-top: 1px solid var(--contrast-bg-color);
+    line-height: 2em;
+}
+
+.erasureMaker-footerContainer-inner {
+    margin: 0 auto;
+    max-width: 52em;
+    text-align: center;
+}

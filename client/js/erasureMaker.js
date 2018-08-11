@@ -114,7 +114,7 @@ ca.alanharnum.erasureMaker.addTextFunctionControls = function (erasureControlsCo
 
             var confirmed = confirm(`Do you want to save the erasure "${erasureTitle}"? You can only save once, so cancel if you want to work on it further.\n\nPlease also note that all erasures saved to this site are submitted anonymously and you agree to license your work under a Creative Commons 0 license by saving them here.`);
             if(!confirmed) return;
-            console.log(erasureTextComponent.sourceText);
+
             var erasureData = {
                                 title: erasureTitle,
                                 text: erasureText,
@@ -172,7 +172,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         markup:
         `
         <div class="erasureTitleContainer"><h2 class="erasureTitle"></h2></div>
-        <p class="text eraseStyle-faded"></p>
+        <div class="text eraseStyle-faded"></div>
         <p class="source"></p>
         `
     },
@@ -298,7 +298,7 @@ ca.alanharnum.erasureMaker.text.toggleWord = function (characterSelector) {
   // if original character erased, toggle off erasing for whole word
   if(isErased) {
       word.removeClass("er");
-  // if original character not erased, toggle  erasing for whole word
+  // if original character not erased, toggle erasing for whole word
   } else if (!isErased) {
       word.addClass("er");
   }
@@ -393,15 +393,15 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
             <h2 class="control-header">Cursor Behavior <span class="control-header-explanation">Controls how the cursor interacts with the text. Has keyboard shortcuts.</span></h2>
             <div class="mode-controls controls">
                     <label class="mode-control mode-control-click current-control">
-                        <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
+                        <input class="mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
                         click to toggle <span class="keyboard-shortcut-indicator">c</span>haracters
                     </label>
                     <label class="mode-control mode-control-word">
-                        <input class="fl-hidden-accessible mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
-                        click to toggle <span class="keyboard-shortcut-indicator">w</span>words
+                        <input class="mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
+                        click to toggle <span class="keyboard-shortcut-indicator">w</span>ords
                     </label>
                     <label class="mode-control mode-control-titleSelect">
-                        <input class="fl-hidden-accessible mode-control-click-radio" type="radio" name="mode-control-radio" value="titleSelect" />
+                        <input class="mode-control-click-radio" type="radio" name="mode-control-radio" value="titleSelect" />
                         select words for <span class="keyboard-shortcut-indicator">t</span>itle
                     </label>
             </div>
