@@ -160,7 +160,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         id: null
     },
     selectors: {
-        "text": ".text",
+        "text": ".erasureText",
         "source": ".source",
         "paragraph": ".paragraph",
         "character": ".char",
@@ -172,7 +172,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         markup:
         `
         <div class="erasureTitleContainer"><h2 class="erasureTitle"></h2></div>
-        <div class="text eraseStyle-faded"></div>
+        <div class="erasureText eraseStyle-faded"></div>
         <p class="source"></p>
         `
     },
