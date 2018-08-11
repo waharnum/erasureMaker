@@ -208,7 +208,7 @@ ca.alanharnum.erasureMaker.text.changeEraseStyle = function (erasureTextComponen
     var text = erasureTextComponent.locate("text");
     var eraseStyleClass = "eraseStyle-" + eraseStyle;
     text.toggleClass();
-    text.addClass("text " + eraseStyleClass);
+    text.addClass("erasureText " + eraseStyleClass);
 };
 
 ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
