@@ -79,6 +79,7 @@ body {
 
 .erasureMaker-contentContainer {
     grid-area: content;
+    max-width: 55rem;
 }
 
 .erasureMaker-footerContainer {
