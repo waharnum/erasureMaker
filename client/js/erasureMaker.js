@@ -66,7 +66,7 @@ fluid.defaults("ca.alanharnum.erasureMakerView", {
 fluid.defaults("ca.alanharnum.erasureMakerEdit", {
     gradeNames: ["ca.alanharnum.erasureMakerView"],
     model: {
-        currentMode: "click"
+        currentMode: "word"
     },
     components: {
         erasureText: {
@@ -184,7 +184,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
 fluid.defaults("ca.alanharnum.erasureMaker.text.edit", {
     gradeNames: ["ca.alanharnum.erasureMaker.text.view"],
     model: {
-        currentMode: "click"
+        currentMode: "word"
     },
     listeners: {
         "onMarkupAppended.addSourceText": {
@@ -384,7 +384,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.view", {
 fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
     gradeNames: ["ca.alanharnum.erasureMaker.controls.view"],
     model: {
-        currentMode: "click"
+        currentMode: "word"
     },
     strings: {
         markup:

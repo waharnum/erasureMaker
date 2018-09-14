@@ -1,5 +1,10 @@
+body {
+    margin: 0 auto;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 .eraseStyle-faded .er {
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .eraseStyle-strike-through .er {
@@ -15,5 +20,76 @@
 }
 
 .text {
-    font-family: 'Source Code Pro', sans-serif;
+    font-family: 'Source Code Pro', monospace;
+    width: 40em;
+    border: 1px solid #CCC;
+    background-color: rgb(255,255,240);
+    padding: 1em;
+}
+
+.erasureMaker-editPage .char {
+  cursor: pointer;
+}
+
+.erasureMaker-pageContainer {
+    display: grid;
+    grid-template-areas:
+    "header"
+    "menu"
+    "content"
+    "footer";
+    column-gap: 1em;
+}
+
+
+.erasureMaker-pageTitle-container, .erasureMaker-menuContainer, .erasureMaker-contentContainer, .erasureMaker-footerContainer {
+    padding-left: 0.75em;
+}
+
+.erasureMaker-pageTitle-container {
+    grid-area: header;
+    background-color: #DDD;
+}
+
+.erasureMaker-menuContainer {
+    grid-area: menu;
+    background-color: #DDD;
+}
+
+.erasureMaker-contentContainer {
+    grid-area: content;
+}
+
+.erasureMaker-footerContainer {
+    padding: 0.75em 0;
+    text-align: center;
+    grid-area: footer;
+    background-color: #DDD;
+}
+
+/* Larger screen */
+@media screen and (min-width: 55em) {
+    .erasureMaker-pageContainer {
+        grid-template-areas:
+        "header header header header header"
+        "menu content content content content"
+        "footer footer footer footer footer";
+    }
+
+    .erasureMaker-menuContainer {
+        padding-right: 0.75em;
+    }
+
+    .erasureMaker-menuItem {
+        padding-bottom: 0.75em;
+    }
+}
+
+/* Smaller screen */
+
+@media screen and (max-width: 55em) {
+    .erasureMaker-menuItem {
+        display: inline;
+        padding-right: 0.75em;
+    }
 }
