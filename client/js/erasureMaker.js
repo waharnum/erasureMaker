@@ -402,14 +402,14 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
                     </label>
                     <label class="mode-control mode-control-titleSelect">
                         <input class="mode-control-titleSelect-radio" type="radio" name="mode-control-radio" value="titleSelect" />
-                        select words for <span class="keyboard-shortcut-indicator">t</span>itle
+                        select words for <span class="keyboard-shortcut-indicator">t</span>itle (when saving)
                     </label>
             </div>
             <h2 class="control-header">Functions <span class="control-header-explanation">Operate on the entire text at once.</span></h2>
             <div class="function-controls controls">
                 <button type="button" class="function-control-erase-all">erase all</button>
                 <button type="button" class="function-control-restore-all">restore all</button>
-                <button type="button" class="function-control-save">save</button>
+                <button type="button" class="function-control-save">save (select words for title first)</button>
             </div>
             <div class="message-area"></div>
             <label for="select-erase-style">
