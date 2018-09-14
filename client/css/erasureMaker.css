@@ -1,5 +1,4 @@
-body {
-    margin: 0 auto;
+body {    
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -23,7 +22,7 @@ body {
     visibility: hidden;
 }
 
-.text {
+.erasureText {
     font-family: 'Source Code Pro', monospace;
     width: 40em;
     border: 1px solid #CCC;
