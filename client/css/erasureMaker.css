@@ -3,6 +3,10 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.control-header-explanation {
+    font-size: 0.75rem;
+}
+
 .eraseStyle-faded .er {
   opacity: 0.4;
 }
