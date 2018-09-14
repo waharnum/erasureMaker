@@ -75,6 +75,7 @@ body {
 .erasureMaker-menuContainer {
     grid-area: menu;
     background-color: #DDD;
+    font-size: 1.2rem;    
 }
 
 .erasureMaker-contentContainer {
@@ -93,9 +94,10 @@ body {
 @media screen and (min-width: 55rem) {
     .erasureMaker-pageContainer {
         grid-template-areas:
-        "header header header header header"
-        "menu content content content content"
-        "footer footer footer footer footer";
+        "header header"
+        "menu content"
+        "footer footer";
+        grid-template-columns: max-content auto;
     }
 
     .erasureMaker-menuContainer {
