@@ -160,7 +160,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         id: null
     },
     selectors: {
-        "text": ".text",
+        "text": ".erasureText",
         "source": ".source",
         "paragraph": ".paragraph",
         "character": ".char",
@@ -172,7 +172,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.text.view", {
         markup:
         `
         <div class="erasureTitleContainer"><h2 class="erasureTitle"></h2></div>
-        <div class="text eraseStyle-faded"></div>
+        <div class="erasureText eraseStyle-faded"></div>
         <p class="source"></p>
         `
     },
@@ -208,7 +208,7 @@ ca.alanharnum.erasureMaker.text.changeEraseStyle = function (erasureTextComponen
     var text = erasureTextComponent.locate("text");
     var eraseStyleClass = "eraseStyle-" + eraseStyle;
     text.toggleClass();
-    text.addClass("text " + eraseStyleClass);
+    text.addClass("erasureText " + eraseStyleClass);
 };
 
 ca.alanharnum.erasureMaker.text.addSourceText = function (that) {
@@ -278,7 +278,7 @@ ca.alanharnum.erasureMaker.text.addErasureByCharacterStructure = function (that)
 ca.alanharnum.erasureMaker.text.addCharacterErasureEvents = function (that) {
     that.locate("character").each(function (i,e) {
         $(this).click(function () {
-          if(that.model.currentMode === "click") {
+          if(that.model.currentMode === "char") {
             $(this).toggleClass("er");
           }
           if(that.model.currentMode === "word") {
@@ -392,16 +392,16 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
         <form>
             <h2 class="control-header">Cursor Behavior <span class="control-header-explanation">Controls how the cursor interacts with the text. Has keyboard shortcuts.</span></h2>
             <div class="mode-controls controls">
-                    <label class="mode-control mode-control-click current-control">
-                        <input class="mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
-                        click to toggle <span class="keyboard-shortcut-indicator">c</span>haracters
-                    </label>
                     <label class="mode-control mode-control-word">
-                        <input class="mode-control-click-radio" checked type="radio" name="mode-control-radio" value="click" />
+                        <input class="mode-control-word-radio" checked type="radio" name="mode-control-radio" value="word" />
                         click to toggle <span class="keyboard-shortcut-indicator">w</span>ords
                     </label>
+                    <label class="mode-control mode-control-char current-control">
+                        <input class="mode-control-char-radio" type="radio" name="mode-control-radio" value="char" />
+                        click to toggle <span class="keyboard-shortcut-indicator">c</span>haracters
+                    </label>
                     <label class="mode-control mode-control-titleSelect">
-                        <input class="mode-control-click-radio" type="radio" name="mode-control-radio" value="titleSelect" />
+                        <input class="mode-control-titleSelect-radio" type="radio" name="mode-control-radio" value="titleSelect" />
                         select words for <span class="keyboard-shortcut-indicator">t</span>itle
                     </label>
             </div>
@@ -437,7 +437,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
     },
     selectors: {
         "mode-control": ".mode-control",
-        "mode-control-click": ".mode-control-click",
+        "mode-control-char": ".mode-control-char",
         "mode-control-word": ".mode-control-word",
         "mode-control-titleSelect": ".mode-control-titleSelect",
         "function-control-erase-all": ".function-control-erase-all",
@@ -450,7 +450,7 @@ fluid.defaults("ca.alanharnum.erasureMaker.controls.edit", {
 ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
     $(document).keyup(function (e) {
         if(e.key === "c") {
-            that.locate("mode-control-click").click();
+            that.locate("mode-control-char").click();
         }
         if(e.key === "w") {
             that.locate("mode-control-word").click();
@@ -462,8 +462,8 @@ ca.alanharnum.erasureMaker.controls.addKeyboardShortcuts = function (that) {
 };
 
 ca.alanharnum.erasureMaker.controls.addModeControls = function (that) {
-    that.locate("mode-control-click").click(function () {
-        that.applier.change("currentMode", "click");
+    that.locate("mode-control-char").click(function () {
+        that.applier.change("currentMode", "char");
         $(this).addClass("current-control");
           that.locate("mode-control").not($(this)).removeClass("current-control");
     });
